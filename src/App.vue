@@ -1,13 +1,20 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">{{ $t("home.title") }}</router-link> |
-      <router-link to="/about">{{ $t("about.title") }}</router-link> |
-      <router-link to="/test">Test</router-link>
+      <Navbar />
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+import Navbar from "./components/Navbar.vue";
+
+export default {
+  name: "app",
+  components: { Navbar },
+};
+</script>
 
 <style lang="scss">
 #app {

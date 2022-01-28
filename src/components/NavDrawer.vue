@@ -9,9 +9,9 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="body-2"
-              >{{ item.text }}
-            </v-list-item-title>
+            <v-list-item-title class="body-2">{{
+              $t(item.text_key)
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -32,9 +32,38 @@ export default {
   data() {
     return {
       items: [
-        { icon: "mdi-home-outline", text: this.$t("home.title"), action: "/" },
-        { icon: "mdi-help-circle-outline", text: this.$t("about.title"), action: "/about" },
-        { icon: "mdi-bug-check-outline", text: "Test", action: "/test" },
+        { icon: "mdi-home-outline", text_key: "home.title", action: "/" },
+        {
+          icon: "mdi-help-circle-outline",
+          text_key: "about.title",
+          action: "/about",
+        },
+        {
+          icon: "mdi-bug-check-outline",
+          text_key: "absences.title",
+          action: "/conges",
+        },
+        {
+          icon: "mdi-bug-account-clock",
+          text_key: "holidays.title",
+          action: "/joursferies",
+        },
+        { text_key: "----------" }, // divider
+        {
+          icon: "mdi-calendar-range",
+          text_key: "planning.title",
+          action: "/planning",
+        },
+        {
+          icon: "mdi-clipboard-text-clock-outline",
+          text_key: "manage-abs.title",
+          action: "/gestion",
+        },
+        {
+          icon: "mdi-chart-bar",
+          text_key: "graph-service.title",
+          action: "/histogramme",
+        },
       ],
     };
   },

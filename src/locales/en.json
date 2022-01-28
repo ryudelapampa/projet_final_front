@@ -1,5 +1,29 @@
 {
-  "title": "Absence Management Tool",
-  "home.title": "Home",
-  "about.title": "About"
+  "app": {
+    "title": "Absence Management Tool"
+  },
+  "home": {
+    "title": "Home"
+  },
+  "about": {
+    "title": "About"
+  },
+  "absences": {
+    "title": "My Absences"
+  },
+  "request": {
+    "title": "Request Absence"
+  },
+  "holidays": {
+    "title": "Bank Holidays & Company TOIL"
+  },
+  "planning": {
+    "title": "Daily Absence Calendar"
+  },
+  "manage-abs": {
+    "title": "Manage Departement Absences"
+  },
+  "graph-service": {
+    "title": "Department Absence Graph"
+  }
 }

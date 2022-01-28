@@ -1,5 +1,29 @@
 {
-  "title": "Outil de gestion d'absences",
-  "home.title": "Accueil",
-  "about.title": "A propos"
+  "app": {
+    "title": "Outil de gestion d'absences"
+  },
+  "home": {
+    "title": "Accueil"
+  },
+  "about": {
+    "title": "A propos"
+  },
+  "absences": {
+    "title": "Mes congés"
+  },
+  "request": {
+    "title": "Demande d'absence"
+  },
+  "holidays": {
+    "title": "Jours fériés & RTT employeur"
+  },
+  "planning": {
+    "title": "Planning des congés par jour"
+  },
+  "manage-abs": {
+    "title": "Gérer les congés du service"
+  },
+  "graph-service": {
+    "title": "Histogramme des congés du service"
+  }
 }

@@ -5,7 +5,7 @@
     </v-navigation-drawer>
     <v-app-bar dark clipped-left app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>{{ $t("title") }}</v-toolbar-title>
+      <v-toolbar-title>{{ $t("app.title") }}</v-toolbar-title>
     </v-app-bar>
   </nav>
 </template>

@@ -41,7 +41,7 @@ export default {
         {
           icon: "mdi-bug-check-outline",
           text_key: "absences.title",
-          action: "/conges",
+          action: "/mesconges",
         },
         {
           icon: "mdi-bug-account-clock",

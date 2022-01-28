@@ -9,14 +9,35 @@
     "title": "A propos"
   },
   "absences": {
-    "title": "Mes congés"
+    "title": "Mes congés",
+    "start": "Date de début",
+    "end": "Date de fin",
+    "type": "Type",
+    "motif": "Motif",
+    "status": "Statut"
+  },
+  "type-abs": {
+    "paid": "Congés payés",
+    "unpaid": "Congés sans solde",
+    "rtt-emp": "RTT employeur",
+    "rtt-sal": "RTT employé",
+    "bank-hol": "Jour férié"
+  },
+  "status": {
+    "initial": "Initiale",
+    "pending": "En attente de validation",
+    "approved": "Validée",
+    "rejected": "Rejetée"
   },
   "request": {
     "title": "Demande d'absence"
   },
   "holidays": {
-    "title": "Jours fériés & RTT employeur"
+    "title": "Jours fériés & RTT employeur",
+    "new-year": "Jour de l'an",
+    "easter-mon": "Lundi de Pâques"
   },
+
   "planning": {
     "title": "Planning des congés par jour"
   },
@@ -25,5 +46,10 @@
   },
   "graph-service": {
     "title": "Histogramme des congés du service"
+  },
+  "table": {
+    "actions": "Actions",
+    "label": "Libellé",
+    "type": "Type"
   }
 }

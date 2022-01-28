@@ -9,13 +9,33 @@
     "title": "About"
   },
   "absences": {
-    "title": "My Absences"
+    "title": "My Absences",
+    "start": "Start date",
+    "end": "End date",
+    "type": "Type",
+    "motif": "Motif",
+    "status": "Status"
+  },
+  "type-abs": {
+    "paid": "Paid leave",
+    "unpaid": "Unpaid leave",
+    "rtt-emp": "Company TOIL",
+    "rtt-sal": "Employee TOIL",
+    "bank-hol": "Bank Holiday"
+  },
+  "status": {
+    "initial": "Initial",
+    "pending": "Pending validation",
+    "approved": "Approved",
+    "rejected": "Rejected"
   },
   "request": {
     "title": "Request Absence"
   },
   "holidays": {
-    "title": "Bank Holidays & Company TOIL"
+    "title": "Bank Holidays & Company TOIL",
+    "new-year": "New Year's Day",
+    "easter-mon": "Easter Monday"
   },
   "planning": {
     "title": "Daily Absence Calendar"
@@ -25,5 +45,11 @@
   },
   "graph-service": {
     "title": "Department Absence Graph"
+  },
+  "table": {
+    "actions": "Actions",
+    "date": "Date",
+    "label": "Label",
+    "type": "Type"
   }
 }

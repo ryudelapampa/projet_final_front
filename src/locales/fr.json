@@ -49,7 +49,10 @@
   },
   "table": {
     "actions": "Actions",
+    "date": "Date",
     "label": "Libellé",
-    "type": "Type"
+    "type": "Type",
+    "name": "Nom",
+    "email": "Email"
   }
 }

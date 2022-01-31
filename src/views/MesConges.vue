@@ -70,6 +70,7 @@
               :events="events"
               :color="primary"
               :type="week"
+              :locale="locale"
             >
             </v-calendar>
           </v-sheet>
@@ -81,6 +82,7 @@
 </template>
 
 <script>
+import i18n from '../i18n';
 export default {
   name: "mesconges",
   data: () => ({
@@ -93,6 +95,7 @@ export default {
         end: "2022-01-07",
       },
     ],
+    locale: i18n,
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -101,11 +104,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  text-align: center;
-  margin-top: 1rem;
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;

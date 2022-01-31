@@ -37,4 +37,9 @@ export default {
     }
   }
 }
+
+h1 {
+  text-align: center;
+  margin: 1rem 0;
+}
 </style>

@@ -50,6 +50,8 @@
     "actions": "Actions",
     "date": "Date",
     "label": "Label",
-    "type": "Type"
+    "type": "Type",
+    "name": "Name",
+    "email": "Email"
   }
 }

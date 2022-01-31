@@ -52,7 +52,7 @@ export default {
         {
           icon: "mdi-calendar-range",
           text_key: "planning.title",
-          action: "/planning",
+          action: "/servicejour",
         },
         {
           icon: "mdi-clipboard-text-clock-outline",

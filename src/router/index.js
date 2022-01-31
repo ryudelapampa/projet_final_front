@@ -5,6 +5,8 @@ import Home from "@/views/Home.vue";
 import testVue from "@/views/test.vue";
 import MesCongesVue from "../views/MesConges.vue";
 import JoursFeriesVue from "../views/JoursFeries.vue";
+import ServiceJourVue from "../views/ServiceJour.vue";
+import CongesServiceVue from "../views/GestionConges.vue";
 
 Vue.use(VueRouter);
 
@@ -37,6 +39,16 @@ const routes = [
     path: "/joursferies",
     name: "JoursFeries",
     component: JoursFeriesVue,
+  },
+  {
+    path: "/servicejour",
+    name: "ServiceJour",
+    component: ServiceJourVue,
+  },
+  {
+    path: "/gestion",
+    name: "CongesService",
+    component: CongesServiceVue,
   },
 ];
 

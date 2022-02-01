@@ -32,7 +32,10 @@ export default {
   data() {
     return {
       items: [
-        { icon: "mdi-home-outline", text_key: "home.title", action: "/" },
+        { icon: "mdi-home-outline",
+        text_key: "home.title",
+        action: "/" 
+        },
         {
           icon: "mdi-help-circle-outline",
           text_key: "about.title",

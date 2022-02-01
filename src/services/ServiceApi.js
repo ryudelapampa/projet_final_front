@@ -1,0 +1,26 @@
+import axios from "axios";
+
+const url = 'http://localhost:8590/api/service'
+
+export default class ServiceApi {
+
+    static gettAll() {
+        return axios.get(url+"/all")
+    }
+
+    static find(id) {
+        return axios.get(url+`/${id}`)
+    }
+
+    static deleteCli(id) {
+        return axios.delete(url+`/${id}`)
+    }
+
+    static add(service) {
+        return axios.post(service)
+    }
+
+    static update(id,service) {
+        return axios.put(url+`/${id}`,service)
+    }
+}

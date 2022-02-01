@@ -69,7 +69,7 @@
               :value="today"
               :events="events"
               :color="primary"
-              :type="week"
+              :type="month"
               :locale="locale"
             >
             </v-calendar>

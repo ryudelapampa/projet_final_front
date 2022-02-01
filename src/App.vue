@@ -1,10 +1,12 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <Navbar />
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <Navbar />
+    <v-main>
+      <v-slide-y-transition mode="out-in">
+        <router-view/>
+      </v-slide-y-transition>
+    </v-main>
+  </v-app>
 </template>
 
 <script>

@@ -7,7 +7,7 @@
         <th>{{ $t("table.date") }}</th>
         <th>{{ $t("table.label") }}</th>
         <!-- <th>{{ $t("table.type") }}</th> -->
-        <th>{{ $t("table.actions") }}</th>
+        <th v-show="administrateur">{{ $t("table.actions") }}</th>
       </thead>
       <tbody>
         <!-- AFFICHAGE JOUR FERIE -->
@@ -15,13 +15,17 @@
           <td>{{ jourferie.dateJour }}</td>
           <td>{{ jourferie.libelle }}</td>
           <!-- <td>{{ $t("type-abs.bank-hol") }}</td> -->
-          <td>
-            <v-icon color="green">mdi-lead-pencil</v-icon>
-            |
-            <v-icon color="red">mdi-trash-can-outline</v-icon>
+          <td v-show="administrateur">
+            <v-btn>Modif<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
+              |
+            <v-btn>Delete<v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
           </td>
         </tr>
       </tbody>
+      <router-link to="/ajoutrttemployeur">
+        <v-btn v-show="administrateur" color="primary" elevation="2">Ajouter</v-btn>
+      </router-link>
+      
     </table>
 
     <table v-show="rttemployeur">
@@ -31,7 +35,7 @@
         <th>{{ $t("table.label") }}</th>
         <th>Statut</th>
         <th>{{ $t("table.type") }}</th>
-        <th>{{ $t("table.actions") }}</th>
+        <th v-show="administrateur">{{ $t("table.actions") }}</th>
       </thead>
       <tbody>
         <tr v-for="absence in listAbsence" v-bind:key="absence.id" >
@@ -40,13 +44,16 @@
             <td>{{ absence.motif }}</td>
             <td>{{ absence.statut }}</td>
             <td>{{ $t("type-abs.rtt-emp") }}</td>
-            <td>
-              <v-icon color="green">mdi-lead-pencil</v-icon>
+            <td v-show="administrateur">
+              <v-btn>Modif<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
               |
-              <v-icon color="red">mdi-trash-can-outline</v-icon>
+              <v-btn>Delete<v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
             </td>
           </tr>
       </tbody>
+      <router-link to="/ajoutferie">
+        <v-btn v-show="administrateur" color="primary" elevation="2">Ajouter</v-btn>
+      </router-link>
     </table>
   </div>
 </template>
@@ -63,6 +70,7 @@
         listAbsence : [],
         ferie : true,
         rttemployeur: false,
+        administrateur: true,
       }
     },
     mounted() {
@@ -86,7 +94,6 @@
           ).catch(errorgeneral => console.log(errorgeneral))
       },
       changeTab() {
-        
         if (this.ferie == true) {
           this.ferie = false;
           this.rttemployeur = true;

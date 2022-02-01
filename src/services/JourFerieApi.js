@@ -16,7 +16,7 @@ export default class JourFerieApi {
     }
 
     static add(jourferie) {
-        return axios.post(jourferie)
+        return axios.post(url,jourferie)
     }
 
     static update(id,jourferie) {

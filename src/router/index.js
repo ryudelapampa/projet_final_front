@@ -7,6 +7,8 @@ import MesCongesVue from "../views/MesConges.vue";
 import JoursFeriesVue from "../views/JoursFeries.vue";
 import ServiceJourVue from "../views/ServiceJour.vue";
 import CongesServiceVue from "../views/GestionConges.vue";
+import FormulaireAjoutFerieVue from "../views/FormulaireAjoutFerie.vue";
+import FormulaireAjoutRttEmployeurVue from "../views/FormulaireAjoutRttEmployeur.vue";
 
 Vue.use(VueRouter);
 
@@ -49,6 +51,16 @@ const routes = [
     path: "/gestion",
     name: "CongesService",
     component: CongesServiceVue,
+  },
+  {
+    path: "/ajoutferie",
+    name: "formulaireajoutferie",
+    component: FormulaireAjoutFerieVue,
+  },
+  {
+    path: "/ajoutrttemployeur",
+    name: "formulaireajoutrttemployeur",
+    component: FormulaireAjoutRttEmployeurVue,
   },
 ];
 

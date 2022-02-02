@@ -10,7 +10,7 @@
         <v-text-field v-model="libelle" :counter="25" :error-messages="errors" label="Libelle" required></v-text-field>
       </validation-provider>
       <validation-provider v-slot="{ errors }" rules="required" name="checkbox">
-        <v-checkbox v-model="checkbox" :error-messages="errors" value="1" label="Option" type="checkbox" required></v-checkbox>
+        <v-checkbox v-model="checkbox" :error-messages="errors" value="1" label="Valider" type="checkbox" required></v-checkbox>
       </validation-provider>
       <v-btn class="mr-4" type="submit" :disabled="invalid"> submit </v-btn>
       <v-btn @click="clear"> clear </v-btn>
@@ -42,27 +42,28 @@
     export default {
         name:"formulaireajoutferie",
         components: {
-        ValidationProvider,
-        ValidationObserver,
+          ValidationProvider,
+          ValidationObserver,
         },
         data: () => ({
-            datePicker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            datePicker: '',
+            // datePicker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             libelle: '',
             checkbox: null,
         }),
 
         methods: {
-        submit () {
-            this.$refs.observer.validate();
-            JourFerieApi.add(new JourFerie(this.datePicker,this.libelle));
-            router.push("/")
-        },
-        clear () {
-            this.datePicker = ''
-            this.libelle = ''
-            this.checkbox = null
-            this.$refs.observer.reset()
-        },
+          submit () {
+              this.$refs.observer.validate();
+              JourFerieApi.add(new JourFerie(this.datePicker,this.libelle));
+              router.push("/joursferies")
+          },
+          clear () {
+              this.datePicker = ''
+              this.libelle = ''
+              this.checkbox = null
+              this.$refs.observer.reset()
+          },
         },
     }
 </script>

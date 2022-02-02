@@ -9,11 +9,11 @@
       <validation-provider v-slot="{ errors }" name="duree" rules="required|max:10">
         <v-text-field v-model="duree" :counter="10" :error-messages="errors" label="Durée" required></v-text-field>
       </validation-provider>
-      <validation-provider v-slot="{ errors }" name="libelle" rules="required|max:25">
-        <v-text-field v-model="libelle" :counter="25" :error-messages="errors" label="Libelle" required></v-text-field>
+      <validation-provider v-slot="{ errors }" name="motif" rules="required|max:25">
+        <v-text-field v-model="motif" :counter="25" :error-messages="errors" label="Motif" required></v-text-field>
       </validation-provider>
       <validation-provider v-slot="{ errors }" rules="required" name="checkbox">
-        <v-checkbox v-model="checkbox" :error-messages="errors" value="1" label="Option" type="checkbox" required></v-checkbox>
+        <v-checkbox v-model="checkbox" :error-messages="errors" value="1" label="Valider" type="checkbox" required></v-checkbox>
       </validation-provider>
       <v-btn class="mr-4" type="submit" :disabled="invalid"> submit </v-btn>
       <v-btn @click="clear"> clear </v-btn>
@@ -23,10 +23,11 @@
 
 <script>
   import AbsenceApi from '../services/AbsenceApi'
-  import { required, max, regex } from 'vee-validate/dist/rules'
-  import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
   import Absence from '../modeles/Absence'
   import router from '../router'
+  import { required, max, regex } from 'vee-validate/dist/rules'
+  import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+  
 
   setInteractionMode('eager')
   extend('required', {
@@ -49,17 +50,18 @@
       ValidationObserver,
     },
     data: () => ({
-      datePicker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      datePicker: '',
+      // datePicker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       duree: '',
-      libelle: '',
+      motif: '',
       checkbox: null,
     }),
 
     methods: {
       submit () {
         this.$refs.observer.validate();
-        AbsenceApi.add(new Absence(this.datePicker, this.libelle, this.duree,'RTT_EMPLOYEUR'));
-        router.push("/")
+        AbsenceApi.add(new Absence(this.datePicker, this.motif, this.duree,'RTT_EMPLOYEUR','INITIALE'));
+        router.push("/joursferies")
       },
       clear () {
         this.datePicker = ''

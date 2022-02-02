@@ -17,7 +17,7 @@ export default class AbsenceApi {
         return axios.get(url+`/${id}`)
     }
 
-    static deleteCli(id) {
+    static delete(id) {
         return axios.delete(url+`/${id}`)
     }
 

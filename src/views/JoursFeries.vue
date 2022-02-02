@@ -2,6 +2,7 @@
   <div>
     <h1>{{ $t("holidays.title") }}</h1>
     <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >Tableau des RTT employeurs</v-btn>
+    <v-btn v-on:click="refresh()" color="primary" elevation="2" >Refresh</v-btn>
 
     <table v-show="ferie">
       <thead>
@@ -19,7 +20,7 @@
           <td v-show="administrateur">
             <v-btn>Modif<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
               |
-            <v-btn>Delete<v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
+            <v-btn :loading="loading" color="error" @click="deleteArray(jourferie.id)">Delete</v-btn>
           </td>
         </tr>
       </tbody>
@@ -48,7 +49,7 @@
             <td v-show="administrateur">
               <v-btn>Modif<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
               |
-              <v-btn>Delete<v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
+              <v-btn :loading="loading" color="error" @click="deleteArray(absence.id)">Delete</v-btn>
             </td>
           </tr>
       </tbody>
@@ -71,7 +72,8 @@
         listAbsence : [],
         ferie : true,
         rttemployeur: false,
-        administrateur: false,
+        administrateur: true,
+        loading : false,
       }
     },
     mounted() {
@@ -104,6 +106,17 @@
           this.rttemployeur = false;
           document.getElementById("switchTab").innerHTML = "Tableau des RTT employeurs";
         }
+      },
+      async deleteArray(id) {
+        this.loading = true;
+        if (this.ferie == true) {
+          JourFerieApi.delete(id);
+        } else if (this.rttemployeur == true) {
+          AbsenceApi.delete(id);
+        }
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        this.loading = false
+        this.refresh()
       }
     },
   };

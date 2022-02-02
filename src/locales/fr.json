@@ -10,6 +10,7 @@
   },
   "absences": {
     "title": "Mes congés",
+    "cal-title": "Planning des absences",
     "start": "Date de début",
     "end": "Date de fin",
     "type": "Type",

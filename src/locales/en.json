@@ -10,6 +10,7 @@
   },
   "absences": {
     "title": "My Absences",
+    "cal-title": "Absence Calendar",
     "start": "Start date",
     "end": "End date",
     "type": "Type",

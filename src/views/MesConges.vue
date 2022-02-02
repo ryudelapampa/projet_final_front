@@ -58,48 +58,15 @@
       </div>
     </div>
 
-    <h2>Planning des absences</h2>
-    <div class="container">
-      <v-row>
-        <v-col>
-          <v-sheet height="400">
-            <v-calendar
-              ref="calendar"
-              :now="today"
-              :value="today"
-              :events="events"
-              :color="primary"
-              :type="week"
-              :locale="locale"
-            >
-            </v-calendar>
-          </v-sheet>
-        </v-col>
-      </v-row>
-    </div>
-    <!-- .container -->
+    <CongesCal />
   </div>
 </template>
 
 <script>
-import i18n from '../i18n';
+import CongesCal from "../components/CongesCal.vue";
 export default {
-  name: "mesconges",
-  data: () => ({
-    today: "2022-01-03",
-    events: [
-      { name: "RTT Employeur", start: "2022-01-03" },
-      {
-        name: "Congés payés",
-        start: "2022-01-04",
-        end: "2022-01-07",
-      },
-    ],
-    locale: i18n,
-  }),
-  mounted() {
-    this.$refs.calendar.scrollToTime("08:00");
-  },
+  name: "MesConges",
+  components: { CongesCal },
 };
 </script>
 

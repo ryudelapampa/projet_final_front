@@ -1,6 +1,7 @@
 import axios from "axios";
+import urlApi from './urlApi.js'
 
-const url ='http://localhost:8590/api/collaborateur'
+const url = urlApi.data().urlGet+"/collaborateur"
 
 export default class CollaborateurApi {
 
@@ -17,7 +18,7 @@ export default class CollaborateurApi {
     }
 
     static add(collaborateur) {
-        return axios.post(collaborateur)
+        return axios.post(url+collaborateur)
     }
 
     static update(id,collaborateur) {

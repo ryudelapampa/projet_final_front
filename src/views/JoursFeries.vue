@@ -2,6 +2,7 @@
   <div>
     <h1>{{ $t("holidays.title") }}</h1>
     <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >Tableau des RTT employeurs</v-btn>
+
     <table v-show="ferie">
       <thead>
         <th>{{ $t("table.date") }}</th>
@@ -22,7 +23,7 @@
           </td>
         </tr>
       </tbody>
-      <router-link to="/ajoutrttemployeur">
+      <router-link to="/ajoutferie">
         <v-btn v-show="administrateur" color="primary" elevation="2">Ajouter</v-btn>
       </router-link>
       
@@ -51,7 +52,7 @@
             </td>
           </tr>
       </tbody>
-      <router-link to="/ajoutferie">
+      <router-link to="/ajoutrttemployeur">
         <v-btn v-show="administrateur" color="primary" elevation="2">Ajouter</v-btn>
       </router-link>
     </table>
@@ -70,7 +71,7 @@
         listAbsence : [],
         ferie : true,
         rttemployeur: false,
-        administrateur: true,
+        administrateur: false,
       }
     },
     mounted() {

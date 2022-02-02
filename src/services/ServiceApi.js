@@ -1,6 +1,7 @@
 import axios from "axios";
+import urlApi from './urlApi.js'
 
-const url = 'http://localhost:8590/api/service'
+const url = urlApi.data().urlGet+"/service"
 
 export default class ServiceApi {
 
@@ -17,7 +18,7 @@ export default class ServiceApi {
     }
 
     static add(service) {
-        return axios.post(service)
+        return axios.post(url+service)
     }
 
     static update(id,service) {

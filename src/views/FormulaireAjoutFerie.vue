@@ -1,48 +1,68 @@
 <template>
-    <div>
-        <v-col class="d-flex" cols="12" sm="2">
-            <v-select :items="choixType" label="Outlined style" outlined></v-select>
-        </v-col>
-        <h1>{{items}} </h1>
-        <v-form ref="form" v-model="valid" lazy-validation>
-            <v-row justify="center">
-                <v-date-picker v-model="picker"></v-date-picker>
-            </v-row>
-            <v-text-field v-model="libelle" :rules="libelleRules" label="Libelle" required ></v-text-field>
-            <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required></v-checkbox>
-            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate"> Validate </v-btn>
-            <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
-        </v-form>
-    </div>
+  <validation-observer ref="observer" v-slot="{ invalid }">
+    <form @submit.prevent="submit">
+      <validation-provider v-slot="{ errors }" name="datePicker" rules="required">
+        <v-row justify="center">
+          <v-date-picker v-model="datePicker" :error-messages="errors" required></v-date-picker>
+        </v-row>
+      </validation-provider>
+      <validation-provider v-slot="{ errors }" name="libelle" rules="required|max:25">
+        <v-text-field v-model="libelle" :counter="25" :error-messages="errors" label="Libelle" required></v-text-field>
+      </validation-provider>
+      <validation-provider v-slot="{ errors }" rules="required" name="checkbox">
+        <v-checkbox v-model="checkbox" :error-messages="errors" value="1" label="Option" type="checkbox" required></v-checkbox>
+      </validation-provider>
+      <v-btn class="mr-4" type="submit" :disabled="invalid"> submit </v-btn>
+      <v-btn @click="clear"> clear </v-btn>
+    </form>
+  </validation-observer>
 </template>
 
 <script>
-    import JourFerieApi from "../services/JourFerieApi";
-    import JourFerie from "../modeles/JourFerie";
-    import router from "../router";
+    import JourFerieApi from '../services/JourFerieApi'
+    import JourFerie from '../modeles/JourFerie'
+    import router from '../router'
+    import { required, max, regex } from 'vee-validate/dist/rules'
+    import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 
+    setInteractionMode('eager')
+    extend('required', {
+        ...required,
+        message: '{_field_} can not be empty',
+    })
+    extend('max', {
+        ...max,
+        message: '{_field_} may not be greater than {length} characters',
+    })
+    extend('regex', {
+        ...regex,
+        message: '{_field_} {_value_} does not match {regex}',
+    })
+    
     export default {
-        name: "formulaireajoutferie",
-        data() {
-            return {
-                picker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                valid: true,
-                libelle: '',
-                libelleRules: [
-                    v => !!v || 'Le libelle est obligatoire',
-                ],
-                checkbox: false,
-            }
+        name:"formulaireajoutferie",
+        components: {
+        ValidationProvider,
+        ValidationObserver,
         },
-         methods: {
-            validate () {
-                this.$refs.form.validate()
-                JourFerieApi.add(new JourFerie(this.picker,this.libelle));
-                router.push("/")
-            },
-            reset () {
-                this.$refs.form.reset()
-            },
+        data: () => ({
+            datePicker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            libelle: '',
+            checkbox: null,
+        }),
+
+        methods: {
+        submit () {
+            this.$refs.observer.validate();
+            JourFerieApi.add(new JourFerie(this.datePicker,this.libelle));
+            router.push("/")
+        },
+        clear () {
+            this.datePicker = ''
+            this.libelle = ''
+            this.checkbox = null
+            this.$refs.observer.reset()
+        },
         },
     }
 </script>

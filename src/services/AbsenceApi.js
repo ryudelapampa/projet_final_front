@@ -1,6 +1,7 @@
 import axios from "axios";
+import urlApi from './urlApi.js'
 
-const url = 'http://localhost:8590/api/absence'
+const url = urlApi.data().urlGet+"/absence"
 
 export default class AbsenceApi {
     
@@ -21,7 +22,7 @@ export default class AbsenceApi {
     }
 
     static add(absence) {
-        return axios.post(absence)
+        return axios.post(url,absence)
     }
 
     static update(id,absence) {

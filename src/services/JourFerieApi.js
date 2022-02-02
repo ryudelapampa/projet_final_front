@@ -1,6 +1,7 @@
 import axios from "axios";
+import urlApi from './urlApi.js'
 
-const url ='http://localhost:8590/api/jourferie'
+const url = urlApi.data().urlGet+"/jourferie"
 
 export default class JourFerieApi {
     static gettAll() {

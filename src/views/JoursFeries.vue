@@ -30,9 +30,9 @@
       
     </table>
 
-    <table v-show="rttemployeur">
+    <table v-show="rttemployeur" style="flex-wrap: nowrap;">
       <thead>
-        <th>{{ $t("table.date") }}</th>
+        <th >{{ $t("table.date") }}</th>
         <th>Durée</th> <!--A mettre dans les fichier langue LOCAUX-->
         <th>{{ $t("table.label") }}</th>
         <th>Statut</th>
@@ -41,7 +41,7 @@
       </thead>
       <tbody>
         <tr v-for="absence in listAbsence" v-bind:key="absence.id" >
-            <td>{{ absence.dateDebut }}</td>
+            <td >{{ absence.dateDebut }}</td>
             <td>{{ absence.duree }} jours</td>
             <td>{{ absence.motif }}</td>
             <td>{{ absence.statut }}</td>

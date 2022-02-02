@@ -17,7 +17,7 @@
       </template>
     </v-list>
     <v-divider />
-    <v-container class="lang-select">
+    <v-container class="lang-select d-flex justify-space-between">
       <v-btn @click="switchLang('fr')" color="deep-purple">FR</v-btn>
       <v-btn @click="switchLang('en')" color="deep-purple">EN</v-btn>
     </v-container>
@@ -35,11 +35,6 @@ export default {
         { icon: "mdi-home-outline",
         text_key: "home.title",
         action: "/" 
-        },
-        {
-          icon: "mdi-help-circle-outline",
-          text_key: "about.title",
-          action: "/about",
         },
         {
           icon: "mdi-bug-check-outline",

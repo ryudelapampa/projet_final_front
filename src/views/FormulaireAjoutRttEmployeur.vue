@@ -57,7 +57,7 @@
       submit () {
         this.$refs.observer.validate();
         AbsenceApi.add(new Absence(this.datePicker, this.motif,'RTT_EMPLOYEUR','INITIALE'));
-        router.push("/joursferies")
+        router.push("/tableau")
       },
       clear () {
         this.datePicker = ''

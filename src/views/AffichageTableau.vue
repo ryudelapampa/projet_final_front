@@ -31,7 +31,7 @@
                 document.getElementById("switchTab").innerHTML = "Tableau des Jours Feries";
             } else if (this.tableau == 'rttemployeur') {
                 this.tableau = 'ferie'
-                document.getElementById("switchTab").innerHTML = "Tableau des Jours Feries";
+                document.getElementById("switchTab").innerHTML = "Tableau des Rtt employeur";
             } else if (this.tableau == 'ferie') {
                 this.tableau = 'rttemployeur'
                 document.getElementById("switchTab").innerHTML = "Tableau des Jours Feries";

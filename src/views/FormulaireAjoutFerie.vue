@@ -56,7 +56,7 @@
           submit () {
               this.$refs.observer.validate();
               JourFerieApi.add(new JourFerie(this.datePicker,this.libelle));
-              router.push("/joursferies")
+              router.push("/tableau");
           },
           clear () {
               this.datePicker = ''

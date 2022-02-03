@@ -1,10 +1,4 @@
 {
-  "app": {
-    "title": "Absence Management Tool"
-  },
-  "home": {
-    "title": "Home"
-  },
   "about": {
     "title": "About"
   },
@@ -17,35 +11,42 @@
     "motif": "Motif",
     "status": "Status"
   },
-  "type-abs": {
-    "paid": "Paid leave",
-    "unpaid": "Unpaid leave",
-    "rtt-emp": "Company TOIL",
-    "rtt-sal": "Employee TOIL",
-    "bank-hol": "Bank Holiday"
+  "app": {
+    "title": "Absence Management Tool"
+  },
+  "btn": {
+    "add": "Add",
+    "delete": "Delete",
+    "edit": "Edit",
+    "refresh": "Refresh"
+  },
+  "graph-service": {
+    "title": "Department Absence Graph"
+  },
+  "holidays": {
+    "title": "Bank Holidays & Company TOIL",
+    "table-rtt": "Company TOIL Table",
+    "table-bank-hols": "Bank Holidays Table",
+    "new-year": "New Year's Day",
+    "easter-mon": "Easter Monday"
+  },
+  "home": {
+    "title": "Home"
+  },
+  "manage-abs": {
+    "title": "Manage Departement Absences"
+  },
+  "planning": {
+    "title": "Daily Absence Calendar"
+  },
+  "request": {
+    "title": "Request Absence"
   },
   "status": {
     "initial": "Initial",
     "pending": "Pending validation",
     "approved": "Approved",
     "rejected": "Rejected"
-  },
-  "request": {
-    "title": "Request Absence"
-  },
-  "holidays": {
-    "title": "Bank Holidays & Company TOIL",
-    "new-year": "New Year's Day",
-    "easter-mon": "Easter Monday"
-  },
-  "planning": {
-    "title": "Daily Absence Calendar"
-  },
-  "manage-abs": {
-    "title": "Manage Departement Absences"
-  },
-  "graph-service": {
-    "title": "Department Absence Graph"
   },
   "table": {
     "actions": "Actions",
@@ -54,5 +55,12 @@
     "type": "Type",
     "name": "Name",
     "email": "Email"
+  },
+  "type-abs": {
+    "paid": "Paid leave",
+    "unpaid": "Unpaid leave",
+    "rtt-emp": "Company TOIL",
+    "rtt-sal": "Employee TOIL",
+    "bank-hol": "Bank Holiday"
   }
 }

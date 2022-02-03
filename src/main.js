@@ -3,26 +3,12 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import router from './router'
 import i18n from './i18n'
-import Vuex from 'vuex'
+//import Vuex from 'vuex'
+import { store } from './stores'
 
-Vue.use(Vuex)
+//Vue.use(Vuex)
 
-const store = new Vuex.Store ( {
-  state: {
-    monState : "State Store 01",
-    listeclient : [
-      { nom : "Client 01"}
-    ]
-  },
-  getters : {
-    allClients: state => {
-      return state.listeclient
-    },
-    addListeClient : state => client => {
-      state.listeclient.push(client)
-    }
-  }
-})
+store.getters.allAbsences
 
 Vue.config.productionTip = false
 

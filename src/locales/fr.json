@@ -1,10 +1,4 @@
 {
-  "app": {
-    "title": "Outil de gestion d'absences"
-  },
-  "home": {
-    "title": "Accueil"
-  },
   "about": {
     "title": "A propos"
   },
@@ -17,36 +11,42 @@
     "motif": "Motif",
     "status": "Statut"
   },
-  "type-abs": {
-    "paid": "Congés payés",
-    "unpaid": "Congés sans solde",
-    "rtt-emp": "RTT employeur",
-    "rtt-sal": "RTT employé",
-    "bank-hol": "Jour férié"
+  "app": {
+    "title": "Outil de gestion d'absences"
+  },
+  "btn": {
+    "add": "Ajouter",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "refresh": "Rafraîchir"
+  },
+  "graph-service": {
+    "title": "Histogramme des congés du service"
+  },
+  "holidays": {
+    "title": "Jours fériés & RTT employeur",
+    "table-rtt": "Tableau des RTT employeurs",
+    "table-bank-hols": "Tableau des jours fériés",
+    "new-year": "Jour de l'an",
+    "easter-mon": "Lundi de Pâques"
+  },
+  "home": {
+    "title": "Accueil"
+  },
+  "manage-abs": {
+    "title": "Gérer les congés du service"
+  },
+  "planning": {
+    "title": "Planning des congés par jour"
+  },
+  "request": {
+    "title": "Demande d'absence"
   },
   "status": {
     "initial": "Initiale",
     "pending": "En attente de validation",
     "approved": "Validée",
     "rejected": "Rejetée"
-  },
-  "request": {
-    "title": "Demande d'absence"
-  },
-  "holidays": {
-    "title": "Jours fériés & RTT employeur",
-    "new-year": "Jour de l'an",
-    "easter-mon": "Lundi de Pâques"
-  },
-
-  "planning": {
-    "title": "Planning des congés par jour"
-  },
-  "manage-abs": {
-    "title": "Gérer les congés du service"
-  },
-  "graph-service": {
-    "title": "Histogramme des congés du service"
   },
   "table": {
     "actions": "Actions",
@@ -55,5 +55,12 @@
     "type": "Type",
     "name": "Nom",
     "email": "Email"
+  },
+  "type-abs": {
+    "paid": "Congés payés",
+    "unpaid": "Congés sans solde",
+    "rtt-emp": "RTT employeur",
+    "rtt-sal": "RTT employé",
+    "bank-hol": "Jour férié"
   }
 }

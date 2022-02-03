@@ -5,45 +5,22 @@
       <thead>
         <th>{{ $t("absences.type") }}</th>
         <th>{{ $t("absences.start") }}</th>
-        <th>{{ $t("absences.end") }}</th>
+        <!-- <th>{{ $t("absences.end") }}</th> -->
         <th>{{ $t("absences.motif") }}</th>
         <th>{{ $t("absences.status") }}</th>
         <th>{{ $t("table.actions") }}</th>
       </thead>
       <tbody>
-        <tr>
-          <td>{{ $t("type-abs.paid") }}</td>
-          <td>23/05/2022</td>
-          <td>25/05/2022</td>
-          <td>s/o</td>
-          <td>{{ $t("status.pending") }}</td>
-          <td>
-            <v-icon small color="green"> mdi-lead-pencil </v-icon>
-            |
-            <v-icon small color="red"> mdi-trash-can-outline </v-icon>
-          </td>
-        </tr>
-        <tr>
-          <td>{{ $t("type-abs.paid") }}</td>
-          <td>04/01/2022</td>
-          <td>07/01/2022</td>
-          <td>s/o</td>
-          <td>{{ $t("status.approved") }}</td>
-          <td>
-            <v-icon small color="green"> mdi-lead-pencil </v-icon>
-            |
-            <v-icon small color="red"> mdi-trash-can-outline </v-icon>
-          </td>
-        </tr>
-        <tr>
-          <!-- 
-            TODO à lier avec la bdd pour les données 
-          <td>{{ abs.start }}</td>
-          <td>{{ abs.end }}</td>
+        <tr v-for="abs in listAbsence" v-bind:key="abs.id">
           <td>{{ abs.type }}</td>
+          <td>{{ abs.dateDebut }}</td>
           <td>{{ abs.motif }}</td>
-          <td>{{ abs.status }}</td>
-          -->
+          <td>{{ abs.statut }}</td>
+          <td>
+            <v-icon small color="green"> mdi-lead-pencil </v-icon>
+            |
+            <v-icon small color="red"> mdi-trash-can-outline </v-icon>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -51,10 +28,10 @@
       <div class="soldes">
         <p>Solde congés payés : 16</p>
         <p>Solde RTT : 4</p>
-        <!-- .solde -->
       </div>
+      <!-- .soldes -->
       <div>
-        <button class="btn btn-success">Ajouter</button>
+        <button class="btn btn-success">{{ $t("btn.add") }}</button>
       </div>
     </div>
 
@@ -64,9 +41,32 @@
 
 <script>
 import CongesCal from "../components/CongesCal.vue";
+import AbsenceApi from "../services/AbsenceApi";
 export default {
   name: "MesConges",
   components: { CongesCal },
+  data() {
+    return {
+      listAbsence: [],
+      //    listeAbs: this.$store.getters.allAbsences,
+    };
+  },
+  mounted() {
+    this.refresh();
+  },
+  methods: {
+    refresh() {
+      AbsenceApi.gettAll()
+        .then(
+          (response) => {
+            this.listAbsence = response.data;
+          },
+          (errorlocale) => console.log(errorlocale),
+          () => console.log("Finally")
+        )
+        .catch((errorgeneral) => console.log(errorgeneral));
+    },
+  },
 };
 </script>
 

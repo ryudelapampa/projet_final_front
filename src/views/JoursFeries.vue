@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>{{ $t("holidays.title") }}</h1>
-    <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >Tableau des RTT employeurs</v-btn>
-    <v-btn v-on:click="refresh()" color="primary" elevation="2" >Refresh</v-btn>
+    <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >{{ $t("holidays.table-rtt") }}</v-btn>
+    <v-btn v-on:click="refresh()" color="primary" elevation="2" >{{ $t("btn.refresh") }}</v-btn>
 
     <table v-show="ferie">
       <thead>
@@ -18,14 +18,14 @@
           <td>{{ jourferie.libelle }}</td>
           <!-- <td>{{ $t("type-abs.bank-hol") }}</td> -->
           <td v-show="administrateur">
-            <v-btn>Modif<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
+            <v-btn>{{ $t("btn.edit") }}<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
               |
-            <v-btn :loading="loading" color="error" @click="deleteArray(jourferie.id)">Delete</v-btn>
+            <v-btn :loading="loading" color="error" @click="deleteArray(jourferie.id)">{{ $t("btn.delete") }}</v-btn>
           </td>
         </tr>
       </tbody>
       <router-link to="/ajoutferie">
-        <v-btn v-show="administrateur" color="primary" elevation="2">Ajouter</v-btn>
+        <v-btn v-show="administrateur" color="primary" elevation="2">{{ $t("btn.add") }}</v-btn>
       </router-link>
       
     </table>
@@ -47,14 +47,14 @@
             <td>{{ absence.statut }}</td>
             <td>{{ $t("type-abs.rtt-emp") }}</td>
             <td v-show="administrateur">
-              <v-btn>Modif<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
+              <v-btn>{{ $t("btn.edit") }}<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
               |
-              <v-btn :loading="loading" color="error" @click="deleteArray(absence.id)">Delete</v-btn>
+              <v-btn :loading="loading" color="error" @click="deleteArray(absence.id)">{{ $t("btn.delete") }}</v-btn>
             </td>
           </tr>
       </tbody>
       <router-link to="/ajoutrttemployeur">
-        <v-btn v-show="administrateur" color="primary" elevation="2">Ajouter</v-btn>
+        <v-btn v-show="administrateur" color="primary" elevation="2">{{ $t("btn.add") }}</v-btn>
       </router-link>
     </table>
   </div>

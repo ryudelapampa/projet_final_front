@@ -9,9 +9,10 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="body-2">{{
+            <v-list-item-title v-if="item.text_key" class="body-2">{{
               $t(item.text_key)
             }}</v-list-item-title>
+            <v-divider v-else />
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -51,7 +52,7 @@ export default {
           text_key: "holidays.title",
           action: "/joursferies",
         },
-        { text_key: "----------" }, // divider
+        { text_key: "" }, // divider (sans text_key)
         {
           icon: "mdi-calendar-range",
           text_key: "planning.title",

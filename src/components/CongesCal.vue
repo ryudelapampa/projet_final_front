@@ -16,7 +16,6 @@
           hide-details
           class="ma-2"
           label="type"
-          :locale="locale"
         ></v-select>
         <v-spacer></v-spacer>
         <v-btn icon class="ma-2" @click="$refs.calendar.next()">

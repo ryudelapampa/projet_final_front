@@ -6,9 +6,6 @@
           <v-date-picker v-model="datePicker" :error-messages="errors" required></v-date-picker>
         </v-row>
       </validation-provider>
-      <validation-provider v-slot="{ errors }" name="duree" rules="required|max:10">
-        <v-text-field v-model="duree" :counter="10" :error-messages="errors" label="Durée" required></v-text-field>
-      </validation-provider>
       <validation-provider v-slot="{ errors }" name="motif" rules="required|max:25">
         <v-text-field v-model="motif" :counter="25" :error-messages="errors" label="Motif" required></v-text-field>
       </validation-provider>
@@ -52,7 +49,6 @@
     data: () => ({
       datePicker: '',
       // datePicker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      duree: '',
       motif: '',
       checkbox: null,
     }),
@@ -60,12 +56,11 @@
     methods: {
       submit () {
         this.$refs.observer.validate();
-        AbsenceApi.add(new Absence(this.datePicker, this.motif, this.duree,'RTT_EMPLOYEUR','INITIALE'));
+        AbsenceApi.add(new Absence(this.datePicker, this.motif,'RTT_EMPLOYEUR','INITIALE'));
         router.push("/joursferies")
       },
       clear () {
         this.datePicker = ''
-        this.duree = ''
         this.libelle = ''
         this.checkbox = null
         this.$refs.observer.reset()

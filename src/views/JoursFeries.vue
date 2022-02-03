@@ -2,13 +2,13 @@
   <div>
     <h1>{{ $t("holidays.title") }}</h1>
     <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >{{ $t("holidays.table-rtt") }}</v-btn>
-    <v-btn v-on:click="refresh()" color="primary" elevation="2" >{{ $t("btn.refresh") }}</v-btn>
+    <v-btn v-show="dev" v-on:click="refresh()" color="primary" elevation="2" >{{ $t("btn.refresh") }}</v-btn>
 
+<!-- TABLEAU JOUR FERIE -->
     <table v-show="ferie">
       <thead>
         <th>{{ $t("table.date") }}</th>
         <th>{{ $t("table.label") }}</th>
-        <!-- <th>{{ $t("table.type") }}</th> -->
         <th v-show="administrateur">{{ $t("table.actions") }}</th>
       </thead>
       <tbody>
@@ -25,15 +25,14 @@
         </tr>
       </tbody>
       <router-link to="/ajoutferie">
-        <v-btn v-show="administrateur" color="primary" elevation="2">{{ $t("btn.add") }}</v-btn>
+        <v-btn v-show="administrateur" color="primary" elevation="2" outlined>{{ $t("btn.add") }}</v-btn>
       </router-link>
-      
     </table>
 
+<!-- AFFICHAGE RTT EMPLOYEUR -->
     <table v-show="rttemployeur" style="flex-wrap: nowrap;">
       <thead>
         <th >{{ $t("table.date") }}</th>
-        <th>Durée</th> <!--A mettre dans les fichier langue LOCAUX-->
         <th>{{ $t("table.label") }}</th>
         <th>Statut</th>
         <th>{{ $t("table.type") }}</th>
@@ -41,8 +40,7 @@
       </thead>
       <tbody>
         <tr v-for="absence in listAbsence" v-bind:key="absence.id" >
-            <td >{{ absence.dateDebut }}</td>
-            <td>{{ absence.duree }} jours</td>
+            <td >{{ absence.dateJour }}</td>
             <td>{{ absence.motif }}</td>
             <td>{{ absence.statut }}</td>
             <td>{{ $t("type-abs.rtt-emp") }}</td>
@@ -54,7 +52,7 @@
           </tr>
       </tbody>
       <router-link to="/ajoutrttemployeur">
-        <v-btn v-show="administrateur" color="primary" elevation="2">{{ $t("btn.add") }}</v-btn>
+        <v-btn v-show="administrateur" color="primary" elevation="2" outlined>{{ $t("btn.add") }}</v-btn>
       </router-link>
     </table>
   </div>
@@ -74,6 +72,7 @@
         rttemployeur: false,
         administrateur: true,
         loading : false,
+        dev : false,
       }
     },
     mounted() {

@@ -1,15 +1,13 @@
 export default class Absence {
 
-    dateDebut =""
+    dateJour =""
     motif =""
-    duree =""
     statut =""
     type =""
 
-    constructor(dateDebut,motif,duree,type,statut) {
-        this.dateDebut = dateDebut;
+    constructor(dateJour,motif,type,statut) {
+        this.dateJour = dateJour;
         this.motif = motif;
-        this.duree = duree;
         this.statut = statut;
         this.type = type;
     }

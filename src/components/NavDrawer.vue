@@ -45,7 +45,7 @@ export default {
         {
           icon: "mdi-bug-account-clock",
           text_key: "holidays.title",
-          action: "/joursferies",
+          action: "/tableau",
         },
         { text_key: "" }, // divider (sans text_key)
         {

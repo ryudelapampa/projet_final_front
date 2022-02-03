@@ -2,13 +2,13 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Home from "@/views/Home.vue";
-import testVue from "@/views/test.vue";
 import MesCongesVue from "../views/MesConges.vue";
 import JoursFeriesVue from "../views/JoursFeries.vue";
 import ServiceJourVue from "../views/ServiceJour.vue";
 import CongesServiceVue from "../views/GestionConges.vue";
 import FormulaireAjoutFerieVue from "../views/FormulaireAjoutFerie.vue";
 import FormulaireAjoutRttEmployeurVue from "../views/FormulaireAjoutRttEmployeur.vue";
+import AffichageTableauVue from "../views/AffichageTableau.vue";
 
 Vue.use(VueRouter);
 
@@ -17,11 +17,6 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-  },
-  {
-    path: "/test",
-    name: "testVue",
-    component: testVue,
   },
   {
     path: "/mesconges",
@@ -53,6 +48,11 @@ const routes = [
     name: "formulaireajoutrttemployeur",
     component: FormulaireAjoutRttEmployeurVue,
   },
+  {
+    path: "/tableau",
+    name: "AffichageTableau",
+    component: AffichageTableauVue
+  }
 ];
 
 const router = new VueRouter({

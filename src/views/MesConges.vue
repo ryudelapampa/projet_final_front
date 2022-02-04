@@ -45,6 +45,7 @@ import AbsenceApi from "../services/AbsenceApi";
 export default {
   name: "MesConges",
   components: { CongesCal },
+  props: ['client'],
   data() {
     return {
       listAbsence: [],

@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <Navbar />
-    <v-main>
+    <v-main >
       <v-slide-y-transition mode="out-in">
-        <router-view/>
+        <router-view v-bind:client="client "  />
       </v-slide-y-transition>
     </v-main>
   </v-app>
@@ -11,10 +11,18 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
+import CollaborateurApi from "./services/CollaborateurApi";
 
 export default {
   name: "app",
-  components: { Navbar },
+  components: { 
+    Navbar, 
+  },
+  data: function(){
+    return {
+      client : CollaborateurApi.find(6).then(response => {this.client = response.data}),
+    }
+  },
 };
 </script>
 

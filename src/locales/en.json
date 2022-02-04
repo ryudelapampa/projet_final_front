@@ -16,19 +16,36 @@
   },
   "btn": {
     "add": "Add",
+    "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
     "refresh": "Refresh"
+  },
+  "cal": {
+    "today": "Today",
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "4days": "4 Days"
   },
   "graph-service": {
     "title": "Department Absence Graph"
   },
   "holidays": {
-    "title": "Bank Holidays & Company TOIL",
+    "title": "Whole Company Holidays",
     "table-rtt": "Company TOIL Table",
     "table-bank-hols": "Bank Holidays Table",
     "new-year": "New Year's Day",
-    "easter-mon": "Easter Monday"
+    "easter-mon": "Easter Monday",
+    "labour-day": "Labour Day",
+    "victory-europe": "Victory in Europe",
+    "ascension": "Ascension Day",
+    "whit-monday": "Whit Monday",
+    "bastille": "Bastille Day",
+    "assumption": "Assumption of Mary",
+    "all-saints": "All Saints",
+    "armistice": "Armistice Day",
+    "christmas": "Christmas Day"
   },
   "home": {
     "title": "Home"

@@ -7,10 +7,10 @@
             {{ $t("cal.today") }}
           </v-btn>
           <v-btn fab text small color="grey darken-2" @click="prev">
-            <v-icon small> &lt; </v-icon>
+            <v-icon small> &lt; </v-icon> <!-- flèche gauche -->
           </v-btn>
           <v-btn fab text small color="grey darken-2" @click="next">
-            <v-icon small> &gt; </v-icon>
+            <v-icon small> &gt; </v-icon> <!-- flèche droite -->
           </v-btn>
           <v-toolbar-title v-if="$refs.calendar">
             {{ $refs.calendar.title }}
@@ -131,9 +131,8 @@ export default {
             id: el.id,
             name: el.type,
             start: new Date(el.dateDebut),
-            end: new Date(el.dateDebut + el.duree),
             details: "motif : " + el.motif,
-            color: "red",
+            type: el.type,
           });
         }
         this.events = ev;
@@ -143,7 +142,18 @@ export default {
       this.selectedDay = day;
     },
     getEventColor(event) {
-      return event.color;
+      switch(event.type) {
+        case "CONGE_PAYE":
+          return event.color = "blue";
+        case "CONGE_SANS_SOLDE":
+          return event.color = "indigo";
+        case "RTT_EMPLOYE":
+          return event.color = "green";
+        case "RTT_EMPLOYEUR":
+          return event.color = "deep-purple";
+        default:
+          return event.color = "grey darken-1";
+      }
     },
     viewDay({ date }) {
       this.focus = date;

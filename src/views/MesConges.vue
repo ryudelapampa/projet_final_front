@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       listAbsence: [],
-      //    listeAbs: this.$store.getters.allAbsences,
     };
   },
   mounted() {

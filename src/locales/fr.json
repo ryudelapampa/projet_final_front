@@ -16,19 +16,36 @@
   },
   "btn": {
     "add": "Ajouter",
+    "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Modifier",
     "refresh": "Rafraîchir"
+  },
+  "cal": {
+    "today": "Aujourd'hui",
+    "day": "Jour",
+    "week": "Semaine",
+    "month": "Mois",
+    "4days": "4 Jours"
   },
   "graph-service": {
     "title": "Histogramme des congés du service"
   },
   "holidays": {
-    "title": "Jours fériés & RTT employeur",
+    "title": "Congés d'entreprise",
     "table-rtt": "Tableau des RTT employeurs",
     "table-bank-hols": "Tableau des jours fériés",
     "new-year": "Jour de l'an",
-    "easter-mon": "Lundi de Pâques"
+    "easter-mon": "Lundi de Pâques",
+    "labour-day": "Fête du travail",
+    "victory-europe": "Victoire 1945",
+    "ascension": "Ascension",
+    "whit-monday": "Pentecôte",
+    "bastille": "Fête national",
+    "assumption": "Assomption",
+    "all-saints": "Toussaint",
+    "armistice": "Armistice 1918",
+    "christmas": "Jour de Noël"
   },
   "home": {
     "title": "Accueil"

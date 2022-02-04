@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h1>{{ test.client.nom }} </h1>
+    <h1>{{ client.nom }} </h1>
+    <h2>{{ client.service.libelle}} </h2>
+    <p>Congés restant : {{ this.calculsoldeconge() }} </p>
     <h1>{{ $t("absences.title") }}</h1>
     <table>
       <thead>
@@ -14,36 +16,52 @@
       <tbody>
         <tr v-for="abs in listeAbsence" v-bind:key="abs.id">
           <td>{{ abs.type }}</td>
-          <td>{{ abs.dateDebut }}</td>
+          <td>{{ abs.dateJour }}</td>
           <td>{{ abs.motif }}</td>
           <td>{{ abs.statut }}</td>
           <td>
-            <v-icon small color="green"> mdi-lead-pencil </v-icon>
+            <v-btn>{{ $t("btn.edit") }}</v-btn>
             |
-            <v-icon small color="red"> mdi-trash-can-outline </v-icon>
+            <v-btn :loading="loading" color="error" @click="deleteArray(jourferie.id)">{{ $t("btn.delete") }}</v-btn>
           </td>
         </tr>
       </tbody>
     </table>
+    <v-slide-y-transition mode="out-in">
+      <FormulaireAjoutCongeVue v-show="formulaire" />
+    </v-slide-y-transition>
     
   </div>
 </template>
 
 <script>
 
+import FormulaireAjoutCongeVue from '../components/FormulaireAjoutConge.vue'
 
 export default {
   name: 'Home',
-  props: ["test"],
+  props: ["client"],
+  components: {
+    FormulaireAjoutCongeVue,
+  },
   data() {
     return {
-     listeAbsence: this.test.client.absences,
-     listeCollabService: this.test.service
+      listeAbsence: this.client.absences,
+      formulaire: true,
     }
   },
   methods: {
     refresh() {
       
+    },
+    calculsoldeconge() {
+      let soldeConge = 16;
+      for(const abs of this.client.absences){
+        if ((abs.type == 'CONGE_PAYE') || (abs.type == 'CONGE_NON_PAYE')) {
+          soldeConge = soldeConge - 1 ;
+        } 
+      }
+      return soldeConge;
     }
   },
 }

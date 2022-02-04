@@ -3,7 +3,7 @@
     <Navbar />
     <v-main >
       <v-slide-y-transition mode="out-in">
-        <router-view v-bind:test="{client , service} "  />
+        <router-view v-bind:client="client "  />
       </v-slide-y-transition>
     </v-main>
   </v-app>
@@ -12,16 +12,15 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import CollaborateurApi from "./services/CollaborateurApi";
-import ServiceApi from "./services/ServiceApi";
 
 export default {
   name: "app",
-  components: { Navbar, },
-  
+  components: { 
+    Navbar, 
+  },
   data: function(){
     return {
-      client:CollaborateurApi.find(6).then(response => {this.client = response.data}),
-      service : ServiceApi.find(2).then(response => {this.service = response.data}) 
+      client : CollaborateurApi.find(6).then(response => {this.client = response.data}),
     }
   },
 };

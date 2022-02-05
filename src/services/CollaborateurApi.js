@@ -18,7 +18,7 @@ export default class CollaborateurApi {
     }
 
     static add(collaborateur) {
-        return axios.post(url+collaborateur)
+        return axios.post(url,collaborateur)
     }
 
     static update(id,collaborateur) {

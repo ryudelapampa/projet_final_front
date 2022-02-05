@@ -21,8 +21,8 @@ export default class AbsenceApi {
         return axios.delete(url+`/${id}`)
     }
 
-    static add(absence,collaborateur) {
-        return axios.post(url,absence,collaborateur)
+    static add(absence) {
+        return axios.post(url,absence)
     }
 
     static update(id,absence) {

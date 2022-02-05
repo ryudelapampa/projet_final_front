@@ -28,7 +28,7 @@
       </tbody>
     </table>
     <v-slide-y-transition mode="out-in">
-      <FormulaireAjoutCongeVue v-show="formulaire" />
+      <FormulaireAjoutCongeVue v-bind:client="client" v-show="formulaire" />
     </v-slide-y-transition>
     
   </div>

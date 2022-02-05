@@ -24,4 +24,5 @@ export default class CollaborateurApi {
     static update(id,collaborateur) {
         return axios.put(url+`/${id}`,collaborateur)
     }
+
 }

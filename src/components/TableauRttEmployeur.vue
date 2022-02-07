@@ -6,6 +6,7 @@
                 <th>{{ $t("table.label") }}</th>
                 <th>Statut</th>
                 <th>{{ $t("table.type") }}</th>
+                <th>Collaborateur concerné</th>
                 <th v-show="administrateur">{{ $t("table.actions") }}</th>
             </thead>
             <tbody>
@@ -14,6 +15,7 @@
                     <td>{{ absence.motif }}</td>
                     <td>{{ absence.statut }}</td>
                     <td>{{ $t("type-abs.rtt-emp") }}</td>
+                    <td>{{absence.collaborateur.email}} </td>
                     <td v-show="administrateur">
                         <v-btn>{{ $t("btn.edit") }}<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
                         |
@@ -37,9 +39,9 @@
             return {
                 loading: false,
                 listeRttEmployeur: [],
-                administrateur: true
             }
         },
+        props: ['administrateur'],
         mounted() {
             this.refresh()
         },

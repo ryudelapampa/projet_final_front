@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ client.nom }} </h1>
-    <h2>{{ client.service.libelle}} </h2>
+    <!-- <h2>{{ client.service.libelle}} </h2> -->
     <p>Congés restant : {{ this.calculsoldeconge() }} </p>
     <h1>{{ $t("absences.title") }}</h1>
     <table>
@@ -19,16 +19,16 @@
           <td>{{ abs.dateJour }}</td>
           <td>{{ abs.motif }}</td>
           <td>{{ abs.statut }}</td>
-          <td>
+          <td v-if="abs.type != 'RTT_EMPLOYEUR'">
             <v-btn>{{ $t("btn.edit") }}</v-btn>
             |
-            <v-btn :loading="loading" color="error" @click="deleteArray(jourferie.id)">{{ $t("btn.delete") }}</v-btn>
+            <v-btn :loading="loading" @click="deleteArray(abs.id)" color="error" >{{ $t("btn.delete") }}</v-btn>
           </td>
         </tr>
       </tbody>
     </table>
     <v-slide-y-transition mode="out-in">
-      <FormulaireAjoutCongeVue v-show="formulaire" />
+      <FormulaireAjoutCongeVue v-bind:client="client" v-show="formulaire" />
     </v-slide-y-transition>
     
   </div>
@@ -37,6 +37,7 @@
 <script>
 
 import FormulaireAjoutCongeVue from '../components/FormulaireAjoutConge.vue'
+import AbsenceApi from '../services/AbsenceApi';
 
 export default {
   name: 'Home',
@@ -48,11 +49,15 @@ export default {
     return {
       listeAbsence: this.client.absences,
       formulaire: true,
+      loading: false,
     }
+  },
+  mounted() {
+    this.refresh();
   },
   methods: {
     refresh() {
-      
+      this.listeAbsence = this.client.absences;
     },
     calculsoldeconge() {
       let soldeConge = 16;
@@ -62,6 +67,13 @@ export default {
         } 
       }
       return soldeConge;
+    },
+    async deleteArray(id) {
+        this.loading = true;
+        AbsenceApi.delete(id);
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        this.loading = false
+        this.refresh()
     }
   },
 }

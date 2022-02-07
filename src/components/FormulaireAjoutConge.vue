@@ -36,8 +36,9 @@
     import { required, max, regex } from 'vee-validate/dist/rules'
     import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
     import Absence from '../modeles/Absence'
-    // import CollaborateurApi from '../services/CollaborateurApi'
-import AbsenceApi from '../services/AbsenceApi'
+    import AbsenceApi from '../services/AbsenceApi'
+    import Collaborateur from '../modeles/Collaborateur'
+
 
     setInteractionMode('eager')
     extend('required', {
@@ -62,12 +63,16 @@ import AbsenceApi from '../services/AbsenceApi'
             motif: '',
             typePicker: '',
             checkbox: null,
-            
+            absence : ''            
         }),
+        props: ["client"],
+
         methods: {
             submit() {
                 this.$refs.observer.validate();
-                AbsenceApi.add(new Absence(this.datePicker,this.motif,this.typePicker,'INITIAL'),this.client)
+                this.absence = new Absence(this.datePicker,this.motif,this.typePicker,'INITIAL',new Collaborateur(this.client.id));
+                console.log(this.absence);
+                AbsenceApi.add(this.absence);
             }
         },
         components: {

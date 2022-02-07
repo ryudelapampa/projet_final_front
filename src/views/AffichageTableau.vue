@@ -2,10 +2,10 @@
     <div id="AffichageTableau">
         <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >{{ $t("holidays.table-rtt") }}</v-btn>
         <v-container v-if="tableau === 'ferie'">
-            <TableauJoursFeries/>
+            <TableauJoursFeries v-bind:administrateur="administrateur"/>
         </v-container>
         <v-container v-else-if="tableau === 'rttemployeur'">
-            <TableauRttEmployeur/>
+            <TableauRttEmployeur v-bind:administrateur="administrateur"/>
         </v-container>
     </div>
 </template>
@@ -16,14 +16,17 @@
 
     export default {
     name: "AffichageTableau",
-    data() {
+    data: function() {
         return {
             tableau: "",
-            administrateur: true,
+            administrateur: '',
             dev: false,
         };
     },
-    
+    props: ['client'],
+    mounted() {
+        this.isAdmin();
+    },
     methods: {
         changeTab() {
             if (this.tableau == '') {
@@ -37,6 +40,13 @@
                 document.getElementById("switchTab").innerHTML = "Tableau des Jours Feries";
             }
         },
+        isAdmin() {
+            if (this.client.roles == 'ADMINISTRATEUR'){
+                return this.administrateur = true;
+            } else {
+                return this.administrateur = false;
+            }
+        }
     },
     components: { TableauJoursFeries, TableauRttEmployeur }
 }

@@ -33,9 +33,9 @@
             return {
                 loading: false,
                 listeJoursFeries: [],
-                administrateur: true
             }
         },
+        props: ['administrateur'],
         mounted() {
             this.refresh()
         },

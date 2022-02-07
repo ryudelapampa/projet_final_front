@@ -37,7 +37,7 @@
     import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
     import Absence from '../modeles/Absence'
     import AbsenceApi from '../services/AbsenceApi'
-    import CollaborateurApi from '../services/CollaborateurApi'
+    import Collaborateur from '../modeles/Collaborateur'
 
     setInteractionMode('eager')
     extend('required', {
@@ -69,10 +69,9 @@
         methods: {
             submit() {
                 this.$refs.observer.validate();
-                this.absence = new Absence(this.datePicker,this.motif,this.typePicker,'INITIAL');
+                this.absence = new Absence(this.datePicker,this.motif,this.typePicker,'INITIAL',new Collaborateur(this.client.id));
+                console.log(this.absence);
                 AbsenceApi.add(this.absence);
-                this.client.absences.push(this.absence);
-                CollaborateurApi.update(this.client.id,this.client);
             }
         },
         components: {

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ client.nom }} </h1>
-    <h2>{{ client.service.libelle}} </h2>
+    <!-- <h2>{{ client.service.libelle}} </h2> -->
     <p>Congés restant : {{ this.calculsoldeconge() }} </p>
     <h1>{{ $t("absences.title") }}</h1>
     <table>
@@ -22,7 +22,7 @@
           <td>
             <v-btn>{{ $t("btn.edit") }}</v-btn>
             |
-            <v-btn :loading="loading" color="error" @click="deleteArray(jourferie.id)">{{ $t("btn.delete") }}</v-btn>
+            <v-btn :loading="loading" color="error" >{{ $t("btn.delete") }}</v-btn>
           </td>
         </tr>
       </tbody>

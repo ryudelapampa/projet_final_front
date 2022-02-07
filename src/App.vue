@@ -20,7 +20,7 @@ export default {
   },
   data: function(){
     return {
-      client : CollaborateurApi.find(6).then(response => {this.client = response.data}),
+      client : CollaborateurApi.find(10).then(response => {this.client = response.data}),
     }
   },
 };

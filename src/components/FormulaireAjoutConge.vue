@@ -39,6 +39,7 @@
     import AbsenceApi from '../services/AbsenceApi'
     import Collaborateur from '../modeles/Collaborateur'
 
+
     setInteractionMode('eager')
     extend('required', {
         ...required,

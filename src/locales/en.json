@@ -19,7 +19,9 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "save": "Save",
+    "ok": "Ok"
   },
   "cal": {
     "today": "Today",
@@ -51,7 +53,9 @@
     "title": "Home"
   },
   "manage-abs": {
-    "title": "Manage Departement Absences"
+    "title": "Manage Departement Absences",
+    "form-title": "Edit an entry",
+    "confirm-del": "Are you sure you want to delete this item?"
   },
   "planning": {
     "title": "Daily Absence Calendar"

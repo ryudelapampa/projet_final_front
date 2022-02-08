@@ -19,7 +19,9 @@
     "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Modifier",
-    "refresh": "Rafraîchir"
+    "refresh": "Rafraîchir",
+    "save": "Enregistrer",
+    "ok": "Ok"
   },
   "cal": {
     "today": "Aujourd'hui",
@@ -51,7 +53,9 @@
     "title": "Accueil"
   },
   "manage-abs": {
-    "title": "Gérer les congés du service"
+    "title": "Gérer les congés du service",
+    "form-title": "Modifier une entrée",
+    "confirm-del": "Voulez-vous vraiment supprimer cette entrée ?"
   },
   "planning": {
     "title": "Planning des congés par jour"

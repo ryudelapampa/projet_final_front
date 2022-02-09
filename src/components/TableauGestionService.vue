@@ -68,10 +68,10 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
+                <v-btn color="error darken-3" text @click="close">
                   {{ $t("btn.cancel") }}
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
+                <v-btn color="success darken-3" text @click="save">
                   {{ $t("btn.save") }}
                 </v-btn>
               </v-card-actions>
@@ -84,10 +84,10 @@
               }}</v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">
+                <v-btn color="error darken-1" text @click="closeDelete">
                   {{ $t("btn.cancel") }}
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm">
+                <v-btn color="success darken-1" text @click="deleteItemConfirm">
                   {{ $t("btn.ok") }}
                 </v-btn>
                 <v-spacer></v-spacer>
@@ -97,10 +97,15 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-btn x-small color="success" class="mr-2" @click="editItem(item)">
+        <v-btn
+          x-small
+          color="success darken-1"
+          class="mr-2"
+          @click="editItem(item)"
+        >
           {{ $t("btn.edit") }}
         </v-btn>
-        <v-btn x-small color="error" @click="deleteItem(item)">
+        <v-btn x-small color="error darken-1" @click="deleteItem(item)">
           {{ $t("btn.delete") }}
         </v-btn>
       </template>
@@ -121,6 +126,7 @@ export default {
   data() {
     return {
       absences: this.getAbsences(),
+      currentItem: {},
       dialog: false,
       dialogDelete: false,
       defaultItem: {
@@ -180,7 +186,6 @@ export default {
     editItem(item) {
       this.editedIndex = this.absences.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.updateRecord(item.id, this.editedItem);
       this.dialog = true;
     },
     updateRecord(id, item) {
@@ -192,14 +197,21 @@ export default {
     deleteItem(item) {
       this.editedIndex = this.absences.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      this.currentItem = item;
+      console.log("id à supprimer : " + item.id);
       this.dialogDelete = true;
     },
-
     deleteItemConfirm() {
       this.absences.splice(this.absences, 1);
+      this.deleteRecord();
       this.closeDelete();
     },
 
+    deleteRecord() {
+      AbsenceApi.delete(this.currentItem.id);
+      console.log("id supprimé : " + this.currentItem.id);
+      this.currentItem = {};
+    },
     close() {
       this.dialog = false;
       this.$nextTick(() => {

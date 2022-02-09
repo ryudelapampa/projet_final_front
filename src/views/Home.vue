@@ -1,8 +1,5 @@
 <template>
   <div class="home">
-    <h1>{{ collaborateur.nom }} </h1>
-    <!-- <h2>{{ client.service.libelle}} </h2> -->
-    <!-- <p>Congés restant : {{ this.calculsoldeconge() }} </p> -->
     <h1>{{ $t("absences.title") }}</h1>
     <table>
       <thead>

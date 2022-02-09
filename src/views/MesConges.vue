@@ -1,6 +1,9 @@
 <template>
   <div>
+
+
     <h1>{{ $t("absences.title") }}</h1>
+
     <table>
       <thead>
         <th>{{ $t("absences.type") }}</th>
@@ -11,19 +14,22 @@
         <th>{{ $t("table.actions") }}</th>
       </thead>
       <tbody>
-        <tr v-for="abs in listAbsence" v-bind:key="abs.id">
+        <tr v-for="abs in listeAbsence" v-bind:key="abs.id">
           <td>{{ abs.type }}</td>
-          <td>{{ abs.dateDebut }}</td>
+          <td>{{ abs.dateJour }}</td>
           <td>{{ abs.motif }}</td>
           <td>{{ abs.statut }}</td>
-          <td>
-            <v-icon small color="green"> mdi-lead-pencil </v-icon>
+          <td v-if="abs.type != 'RTT_EMPLOYEUR'">
+            <v-btn>{{ $t("btn.edit") }}</v-btn>
             |
-            <v-icon small color="red"> mdi-trash-can-outline </v-icon>
+            <v-btn :loading="loading" @click="deleteArray(abs.id)" color="error" >{{ $t("btn.delete") }}</v-btn>
           </td>
         </tr>
       </tbody>
     </table>
+
+
+
     <div class="container">
       <div class="soldes">
         <p>Solde congés payés : 16</p>
@@ -40,34 +46,39 @@
 </template>
 
 <script>
-import CongesCal from "../components/CongesCal.vue";
-import AbsenceApi from "../services/AbsenceApi";
-export default {
-  name: "MesConges",
-  components: { CongesCal },
-  props: ['client'],
-  data() {
-    return {
-      listAbsence: [],
-    };
-  },
-  mounted() {
-    this.refresh();
-  },
-  methods: {
-    refresh() {
-      AbsenceApi.gettAll()
-        .then(
-          (response) => {
-            this.listAbsence = response.data;
-          },
-          (errorlocale) => console.log(errorlocale),
-          () => console.log("Finally")
-        )
-        .catch((errorgeneral) => console.log(errorgeneral));
+  import CongesCal from "../components/CongesCal.vue";
+
+  export default {
+    name: "MesConges",
+    components: { CongesCal },
+    data() {
+      return {
+      
+      };
     },
-  },
-};
+    mounted() {
+      this.refresh();
+    },
+    computed: {
+      listeAbsence() {
+        return this.$store.state.client.collaborateur.absences
+      },
+      soldeConge() {
+        let soldeConge = 16;
+        for (const abs of this.listeAbsence) {
+          if ((abs.type == 'CONGE_PAYE') || (abs.type == 'CONGE_NON_PAYE')) {
+            soldeConge = soldeConge -1;
+          }
+        }
+        return soldeConge;
+      }
+    },
+    methods: {
+      refresh() {
+        
+      },
+    },
+  };
 </script>
 
 <style lang="scss" scoped>

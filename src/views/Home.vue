@@ -37,8 +37,7 @@
 <script>
 
 import FormulaireAjoutCongeVue from '../components/FormulaireAjoutConge.vue'
-// import AbsenceApi from '../services/AbsenceApi';
-
+import AbsenceApi from '../services/AbsenceApi'
 
 export default {
   name: 'Home',
@@ -47,7 +46,6 @@ export default {
   },
   data:function() {
     return {
-      listeAbsence: this.collaborateur.absences,
       formulaire: true,
       loading: false,
     }
@@ -55,28 +53,31 @@ export default {
   computed: {
     collaborateur() {
       return this.$store.state.client.collaborateur
+    },
+    listeAbsence() {
+      return this.$store.state.client.collaborateur.absences
     }
   },
   mounted() {
     this.$store.dispatch("getCollab");
   },
   methods: {
-    // calculsoldeconge() {
-    //   let soldeConge = 16;
-    //   for(const abs of this.client.absences){
-    //     if ((abs.type == 'CONGE_PAYE') || (abs.type == 'CONGE_NON_PAYE')) {
-    //       soldeConge = soldeConge - 1 ;
-    //     } 
-    //   }
-    //   return soldeConge;
-    // },
-    // async deleteArray(id) {
-    //     this.loading = true;
-    //     AbsenceApi.delete(id);
-    //     await new Promise(resolve => setTimeout(resolve, 1500))
-    //     this.loading = false
-    //     this.refresh()
-    // }
+    calculsoldeconge() {
+      let soldeConge = 16;
+      for(const abs of this.client.absences){
+        if ((abs.type == 'CONGE_PAYE') || (abs.type == 'CONGE_NON_PAYE')) {
+          soldeConge = soldeConge - 1 ;
+        } 
+      }
+      return soldeConge;
+    },
+    async deleteArray(id) {
+        this.loading = true;
+        AbsenceApi.delete(id);
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        this.loading = false
+        this.refresh()
+    }
   },
 }
 </script>

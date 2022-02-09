@@ -65,12 +65,13 @@
             checkbox: null,
             absence : ''            
         }),
-        props: ["client"],
-
+        computed: {
+            collaborateur() { return this.$store.state.client.collaborateur}
+        },
         methods: {
             submit() {
                 this.$refs.observer.validate();
-                this.absence = new Absence(this.datePicker,this.motif,this.typePicker,'INITIAL',new Collaborateur(this.client.id));
+                this.absence = new Absence(this.datePicker,this.motif,this.typePicker,'INITIAL',new Collaborateur(this.collaborateur.id));
                 console.log(this.absence);
                 AbsenceApi.add(this.absence);
             }

@@ -3,7 +3,7 @@
     <Navbar />
     <v-main >
       <v-slide-y-transition mode="out-in">
-        <router-view v-bind:client="client "  />
+        <router-view/>
       </v-slide-y-transition>
     </v-main>
   </v-app>
@@ -11,7 +11,7 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import CollaborateurApi from "./services/CollaborateurApi";
+// import CollaborateurApi from "./services/CollaborateurApi";
 
 export default {
   name: "app",
@@ -20,8 +20,16 @@ export default {
   },
   data: function(){
     return {
-      client : CollaborateurApi.find(10).then(response => {this.client = response.data}),
+     
     }
+  },
+  computed: {
+    collaborateur() {
+      return this.$store.state.client.collaborateur
+    }
+  },
+  mounted() {
+    this.$store.dispatch("getCollab");
   },
 };
 </script>

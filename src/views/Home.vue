@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <h1>{{ client.nom }} </h1>
+    <h1>{{ collaborateur.nom }} </h1>
     <!-- <h2>{{ client.service.libelle}} </h2> -->
-    <p>Congés restant : {{ this.calculsoldeconge() }} </p>
+    <!-- <p>Congés restant : {{ this.calculsoldeconge() }} </p> -->
     <h1>{{ $t("absences.title") }}</h1>
     <table>
       <thead>
@@ -28,7 +28,7 @@
       </tbody>
     </table>
     <v-slide-y-transition mode="out-in">
-      <FormulaireAjoutCongeVue v-bind:client="client" v-show="formulaire" />
+      <FormulaireAjoutCongeVue v-show="formulaire" />
     </v-slide-y-transition>
     
   </div>
@@ -37,44 +37,46 @@
 <script>
 
 import FormulaireAjoutCongeVue from '../components/FormulaireAjoutConge.vue'
-import AbsenceApi from '../services/AbsenceApi';
+// import AbsenceApi from '../services/AbsenceApi';
+
 
 export default {
   name: 'Home',
-  props: ["client"],
   components: {
     FormulaireAjoutCongeVue,
   },
-  data() {
+  data:function() {
     return {
-      listeAbsence: this.client.absences,
+      listeAbsence: this.collaborateur.absences,
       formulaire: true,
       loading: false,
     }
   },
+  computed: {
+    collaborateur() {
+      return this.$store.state.client.collaborateur
+    }
+  },
   mounted() {
-    this.refresh();
+    this.$store.dispatch("getCollab");
   },
   methods: {
-    refresh() {
-      this.listeAbsence = this.client.absences;
-    },
-    calculsoldeconge() {
-      let soldeConge = 16;
-      for(const abs of this.client.absences){
-        if ((abs.type == 'CONGE_PAYE') || (abs.type == 'CONGE_NON_PAYE')) {
-          soldeConge = soldeConge - 1 ;
-        } 
-      }
-      return soldeConge;
-    },
-    async deleteArray(id) {
-        this.loading = true;
-        AbsenceApi.delete(id);
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        this.loading = false
-        this.refresh()
-    }
+    // calculsoldeconge() {
+    //   let soldeConge = 16;
+    //   for(const abs of this.client.absences){
+    //     if ((abs.type == 'CONGE_PAYE') || (abs.type == 'CONGE_NON_PAYE')) {
+    //       soldeConge = soldeConge - 1 ;
+    //     } 
+    //   }
+    //   return soldeConge;
+    // },
+    // async deleteArray(id) {
+    //     this.loading = true;
+    //     AbsenceApi.delete(id);
+    //     await new Promise(resolve => setTimeout(resolve, 1500))
+    //     this.loading = false
+    //     this.refresh()
+    // }
   },
 }
 </script>

@@ -2,7 +2,7 @@
     <div id="AffichageTableau">
         <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >{{ $t("holidays.table-rtt") }}</v-btn>
         <v-container v-if="tableau === 'ferie'">
-            <TableauJoursFeries v-bind:administrateur="administrateur"/>
+            <TableauJoursFeries v-bind:administrateur="administrateur" />
         </v-container>
         <v-container v-else-if="tableau === 'rttemployeur'">
             <TableauRttEmployeur v-bind:administrateur="administrateur"/>
@@ -19,13 +19,20 @@
     data: function() {
         return {
             tableau: "",
-            administrateur: '',
-            dev: false,
+           
         };
     },
-    props: ['client'],
     mounted() {
         this.isAdmin();
+    },
+    computed: {
+        administrateur(){
+            if (this.$store.state.client.collaborateur.role.libelle == 'ADMINISTRATEUR'){
+                return true;
+            } else {
+                return false;
+            }
+        }
     },
     methods: {
         changeTab() {

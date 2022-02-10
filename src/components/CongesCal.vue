@@ -45,7 +45,7 @@
           ref="calendar"
           v-model="focus"
           color="primary"
-          :events="events"
+          :events="eventList"
           :event-color="getEventColor"
           :type="type"
           @click:event="showEvent"
@@ -89,13 +89,11 @@
 </template>
 
 <script>
-import AbsenceApi from "../services/AbsenceApi";
 
 export default {
   name: "CongesCal",
   data: () => ({
     selectedDay: null,
-    listeAbsences: [],
     today: new Date().toISOString().substr(0, 10),
     focus: "",
     type: "month",
@@ -115,29 +113,29 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    events: [],
     dialog: false,
   }),
   mounted() {
-    this.getEventList();
+    this.$store.dispatch("getCollab")
+  },
+  computed: {
+    eventList() {
+      let ev = [];
+      let data = this.$store.state.client.collaborateur.absences
+      for (let el of data) {
+        ev.push({
+          id : el.id,
+          name: el.type,
+          start: new Date(el.dateJour),
+          details: "motif : " + el.motif,
+          type: el.type,
+        });
+      }
+      return ev ;
+    } 
+    
   },
   methods: {
-    getEventList() {
-      let ev = [];
-      AbsenceApi.gettAll().then((response) => {
-        let data = response.data;
-        for (let el of data) {
-          ev.push({
-            id: el.id,
-            name: el.type,
-            start: new Date(el.dateDebut),
-            details: "motif : " + el.motif,
-            type: el.type,
-          });
-        }
-        this.events = ev;
-      });
-    },
     dayClicked(day) {
       this.selectedDay = day;
     },

@@ -14,12 +14,13 @@
         <th>{{ $t("table.actions") }}</th>
       </thead>
       <tbody>
-        <tr v-for="abs in listeAbsence" v-bind:key="abs.id">
+        <tr v-for="abs in listeAbsence " v-bind:key="abs.id">
+        <!-- <tr v-repeat="abs in listeAbsence | orderBy "> -->
           <td>{{ abs.type }}</td>
           <td>{{ abs.dateJour }}</td>
           <td>{{ abs.motif }}</td>
           <td>{{ abs.statut }}</td>
-          <td v-if="abs.type != 'RTT_EMPLOYEUR'">
+          <td v-if="abs.type != 'RTT_EMPLOYEUR' && abs.statut == 'INITIAL' || abs.statut == 'REJETEE'">
             <v-btn>{{ $t("btn.edit") }}</v-btn>
             |
             <v-btn :loading="loading" @click="deleteArray(abs.id)" color="error" >{{ $t("btn.delete") }}</v-btn>
@@ -28,12 +29,16 @@
       </tbody>
     </table>
 
+    <v-slide-y-transition mode="out-in">
+      <FormulaireAjoutCongeVue/>
+    </v-slide-y-transition>
+
 
 
     <div class="container">
       <div class="soldes">
-        <p>Solde congés payés : 16</p>
-        <p>Solde RTT : 4</p>
+        <p> Solde congé : {{ soldeConge }}</p>
+        <p>Solde RTT : {{ soldeRtt }} </p>
       </div>
       <!-- .soldes -->
       <div>
@@ -47,21 +52,27 @@
 
 <script>
   import CongesCal from "../components/CongesCal.vue";
+  import AbsenceApi from "../services/AbsenceApi";
+  import FormulaireAjoutCongeVue from "../components/FormulaireAjoutConge.vue";
+  import _ from 'lodash'
 
   export default {
     name: "MesConges",
-    components: { CongesCal },
+    components: { CongesCal,FormulaireAjoutCongeVue },
     data() {
       return {
-      
+        loading : false,
+        sortKey : '',
+        sortSettings: {'date' : true},
+        desc : true,
       };
     },
     mounted() {
-      this.refresh();
+      this.$store.dispatch("getCollab");
     },
     computed: {
       listeAbsence() {
-        return this.$store.state.client.collaborateur.absences
+        return _.orderBy(this.$store.state.client.collaborateur.absences,'dateJour','desc')
       },
       soldeConge() {
         let soldeConge = 16;
@@ -71,71 +82,89 @@
           }
         }
         return soldeConge;
+      },
+      soldeRtt() {
+        let soldeRtt = 11;
+        for (const abs of this.listeAbsence) {
+          if ((abs.type == 'RTT_EMPLOYEUR') || (abs.type == 'RTT_EMPLOYER')) {
+            soldeRtt = soldeRtt -1;
+          }
+        }
+        return soldeRtt;
       }
     },
     methods: {
-      refresh() {
-        
+      async deleteArray(id) {
+        this.loading = true;
+        AbsenceApi.delete(id);
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        this.loading = false
+        this.$store.dispatch("getCollab");
       },
+      orderBy(sorKey) {
+        this.sortKey = sorKey;
+        this.sortSettings[sorKey] = !this.sortSettings[sorKey];
+        this.desc = this.sortSettings[sorKey]
+      }
     },
   };
 </script>
 
 <style lang="scss" scoped>
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-  margin-top: 1rem;
-}
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-top: 1rem;
+  }
 
-th {
-  background-color: darkgray;
-  color: white;
-}
-th,
-td {
-  text-align: left;
-  padding: 16px;
-}
+  th {
+    background-color: darkgray;
+    color: white;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 16px;
+  }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-}
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.soldes {
-  background-color: rgb(238, 238, 238);
-  border: 1px solid black;
-  margin-top: 1rem;
-  padding: 1rem;
-}
-.btn-success {
-  background-color: green;
-  color: white;
-  padding: 1rem;
-}
+  .soldes {
+    background-color: rgb(238, 238, 238);
+    border: 1px solid black;
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+  .btn-success {
+    background-color: green;
+    color: white;
+    padding: 1rem;
+  }
 
-/* CALENDAR */
-.v-event {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border-radius: 2px;
-  background-color: #1867c0;
-  color: #ffffff;
-  border: 1px solid #1867c0;
-  font-size: 12px;
-  padding: 3px;
-  cursor: pointer;
-  margin-bottom: 1px;
-  left: 4px;
-  margin-right: 8px;
-  position: relative;
-}
+  /* CALENDAR */
+  .v-event {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 2px;
+    background-color: #1867c0;
+    color: #ffffff;
+    border: 1px solid #1867c0;
+    font-size: 12px;
+    padding: 3px;
+    cursor: pointer;
+    margin-bottom: 1px;
+    left: 4px;
+    margin-right: 8px;
+    position: relative;
+  }
 </style>

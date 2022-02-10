@@ -65,8 +65,11 @@
             checkbox: null,
             absence : ''            
         }),
+        mounted() {
+            this.$store.dispatch("getCollab");
+        },
         computed: {
-            collaborateur() { return this.$store.state.client.collaborateur}
+            collaborateur() {return this.$store.state.client.collaborateur}
         },
         methods: {
             submit() {
@@ -74,6 +77,7 @@
                 this.absence = new Absence(this.datePicker,this.motif,this.typePicker,'INITIAL',new Collaborateur(this.collaborateur.id));
                 console.log(this.absence);
                 AbsenceApi.add(this.absence);
+                this.$store.dispatch("getCollab");
             }
         },
         components: {

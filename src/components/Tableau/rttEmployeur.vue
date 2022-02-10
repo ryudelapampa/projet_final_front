@@ -21,24 +21,27 @@
                                             <v-text-field v-model="editedItem.motif" label="Motif" ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.statut" label="Statut" ></v-text-field> 
+                                            <v-text-field v-model="editedItem.statut" label="Statut" disabled></v-text-field> 
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.type" label="type" ></v-text-field> 
+                                            <v-text-field v-model="editedItem.type" label="type" disabled></v-text-field> 
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.collaborateur" label="Collaborateur concerné" ></v-text-field> 
+                                            <v-text-field v-model="editedItem.collaborateur" label="Collaborateur concerné" disabled></v-text-field> 
                                         </v-col>
                                     </v-row>
                                 </v-container>
                             </v-card-text>
-                            <v-card-actions v-if="administrateur">
+                            <v-card-actions v-if="admin">
                                 <v-spacer></v-spacer>
                                 <v-btn color="error darken-3" text @click="close"> {{ $t("btn.cancel") }} </v-btn>
                                 <v-btn color="success darken-3" text @click="save"> {{ $t("btn.save") }} </v-btn>
                             </v-card-actions>
+                            
                         </v-card>
+                        
                     </v-dialog>
+                    
                     <v-dialog v-model="dialogDelete" max-width="500px">
                         <v-card>
                             <v-card-title wrap class="text-h5">{{ $t("manage-abs.confirm-del") }}</v-card-title>
@@ -54,13 +57,14 @@
             </template>
 
             <template v-slot:item.actions="{ item }">
-                <v-btn x-small color="success darken-1" class="mr-2"  @click="editItem(item)"> {{ $t("btn.edit") }} </v-btn>
-                <v-btn x-small color="error darken-1" @click="deleteItem(item)"> {{ $t("btn.delete") }} </v-btn>
+                <!-- <v-btn x-small color="primary darken-1" class="mr-2"  @click="editItem(item)"> {{ $t("btn.edit") }} </v-btn> -->
+                <v-btn x-small color="error darken-1" @click="deleteItem(item)"> {{ $t("btn.delete") }} </v-btn> 
             </template>
             <template v-slot:no-data>
                 <v-btn color="blue darken-1" text @click="closeDelete">{{ $t("btn.cancel") }}</v-btn>
             </template>
         </v-data-table>
+        <v-btn color="success " text @click="ajout()"> Ajout </v-btn>
     </div>
 </template>
 
@@ -71,6 +75,7 @@
         name: 'tableauRttEmployeur',
         data() {
             return {
+                admin : false,
                 listeRttEmployeur : [],
                 currentItem:{},
                 dialog: false, 
@@ -86,16 +91,17 @@
                 editedItem: {
                     dateJour: '',
                     motif: '',
-                    statut: '',
-                    type: '',
-                    collaborateur: ''
+                    // statut: '',
+                    // type: '',
+                    // collaborateur: ''
                 },
                 headers: [
                     { text: "Date du Jour", align: "center", value: "dateJour" },
                     { text: "Motif", align: "center", value: "motif" },
                     { text: "Statut", align: "center", value: "statut" },
                     { text: "Type", align: "center", value: "type" },
-                    { text: "Collaborateur concerné", align: "center", value: "collaborateur.nom" }
+                    { text: "Collaborateur concerné", align: "center", value: "collaborateur.nom" },
+                    { text: "Actions", align: "center", value: "actions", sortable: false },
                 ],
             };
         },
@@ -114,6 +120,10 @@
                 errorlocale => console.log(errorlocale),
                 () => console.log("Finally")
                 ).catch(errorgeneral => console.log(errorgeneral))
+
+                if (this.$store.state.stateCollaborateur.collaborateur.role.libelle == 'ADMINISTRATEUR') {
+                    this.admin = true
+                } 
             },
             editItem(item) {
                 this.editedIndex = this.listeRttEmployeur.indexOf(item);

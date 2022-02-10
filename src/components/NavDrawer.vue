@@ -59,6 +59,11 @@ export default {
           text_key: "graph-service.title",
           action: "/histogramme",
         },
+        {
+          icon: "mdi-clipboard-text-clock-outline",
+          text_key: "manage-abs.title",
+          action: "/gestion",
+        },
       ]
     };
   },
@@ -69,22 +74,13 @@ export default {
     
   },
   methods: {
-    refresh() {
-      const items = this.items;
-       if (this.$store.state.stateCollaborateur.collaborateur.role.libelle == 'MANAGER') {
-        items.push({
-          icon: "mdi-clipboard-text-clock-outline",
-          text_key: "manage-abs.title",
-          action: "/gestion",
-        },)
-        return this.items = items;
-      } 
+    
     },
     switchLang(lang) {
       i18n.locale = lang;
     },
-  },
-};
+  };
+
 </script>
 
 <style lang="scss" scoped></style>

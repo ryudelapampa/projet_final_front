@@ -23,7 +23,7 @@
                                     </v-row>
                                 </v-container>
                             </v-card-text>
-                            <v-card-actions v-if="administrateur">
+                            <v-card-actions v-if="admin">
                                 <v-spacer></v-spacer>
                                 <v-btn color="error darken-3" text @click="close"> {{ $t("btn.cancel") }} </v-btn>
                                 <v-btn color="success darken-3" text @click="save"> {{ $t("btn.save") }} </v-btn>
@@ -41,17 +41,28 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
+                    <v-dialog v-model="dialogAjout">
+                        <v-card>
+                            <v-card-title wrap class="text-h5"> Ajout </v-card-title>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="error darken-1" text @click="closeAdd"> {{ $t("btn.cancel") }} </v-btn>
+                                <v-btn color="success darken-1" text @click="ajoutItemConfirm"> {{ $t("btn.ok") }} </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
                 </v-toolbar>
             </template>
 
             <template v-slot:item.actions="{ item }">
-                <v-btn x-small color="success darken-1" class="mr-2"  @click="editItem(item)"> {{ $t("btn.edit") }} </v-btn>
+                <!-- <v-btn x-small color="success darken-1" class="mr-2"  @click="editItem(item)"> {{ $t("btn.edit") }} </v-btn> -->
                 <v-btn x-small color="error darken-1" @click="deleteItem(item)"> {{ $t("btn.delete") }} </v-btn>
             </template>
             <template v-slot:no-data>
                 <v-btn color="blue darken-1" text @click="closeDelete">{{ $t("btn.cancel") }}</v-btn>
             </template>
         </v-data-table>
+        <v-btn color="success" text @click="ajout()"> Ajout </v-btn>
     </div>
 </template>
 
@@ -62,6 +73,7 @@
         name: 'tableauJoursFeries',
         data() {
             return {
+                admin : false,
                 tableauJoursFeries: [],
                 currentItem:{},
                 dialog: false, 
@@ -77,7 +89,8 @@
                 },
                 headers: [
                     { text: "Date du Jour", align: "center", value: "dateJour" },
-                    { text: "Libelle", align: "center", value: "libelle" }
+                    { text: "Libelle", align: "center", value: "libelle" },
+                    { text: "Actions", align: "center", value: "actions", sortable: false },
                 ],
             };
         },
@@ -88,28 +101,38 @@
         },
         methods: {
             refresh() {
-               JourFerieApi.gettAll().then((response) => { this.tableauJoursFeries = response.data});
+               JourFerieApi.gettAll().then((response) => { this.tableauJoursFeries = response.data},
+               errorlocale => console.log(errorlocale),
+                () => console.log("Finally")
+                ).catch(errorgeneral => console.log(errorgeneral))
+
+               if (this.$store.state.stateCollaborateur.collaborateur.role.libelle == 'ADMINISTRATEUR') {
+                    this.admin = true
+                } 
             },
             editItem(item) {
-                this.editedIndex = this.joursFeries.indexOf(item);
+                this.editedIndex = this.tableauJoursFeries.indexOf(item);
                 this.editedItem = Object.assign({}, item);
                 this.dialog = true;
             },
-            updateRecord(id, item) {
+            ajout() {
+                this.dialog = true;
+            },
+            updateRecord(item) {
                 console.log(item);
-                JourFerieApi.update(id, item);
+                JourFerieApi.update(item.id, item);
                 console.log(item);
-                this.joursFeries();
+                this.tableauJoursFeries();
             },
             deleteItem(item) {
-                this.editedIndex = this.joursFeries.indexOf(item);
+                this.editedIndex = this.tableauJoursFeries.indexOf(item);
                 this.editedItem = Object.assign({}, item);
                 this.currentItem = item;
                 console.log("id à supprimer : " + item.id);
                 this.dialogDelete = true;
             },
             deleteItemConfirm() {
-                this.joursFeries.splice(this.joursFeries, 1);
+                this.tableauJoursFeries.splice(this.tableauJoursFeries, 1);
                 this.deleteRecord();
                 this.closeDelete();
             },
@@ -134,12 +157,11 @@
                     this.editedIndex = -1;
                 });
             },
-
             save() {
                 if (this.editedIndex > -1) {
-                    Object.assign(this.joursFeries[this.editedIndex], this.editedItem);
+                    Object.assign(this.tableauJoursFeries[this.editedIndex], this.editedItem);
                 } else {
-                    this.joursFeries.push(this.editedItem);
+                    this.tableauJoursFeries.push(this.editedItem);
                 }
                 this.close();
             },

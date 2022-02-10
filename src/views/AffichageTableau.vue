@@ -1,14 +1,18 @@
 <template>
     <div id="AffichageTableau">
         <!-- <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >{{ $t("holidays.table-rtt") }}</v-btn> -->
-        <joursFeriesVue/>
-        <rttEmployeurVue/>
+        <!-- <joursFeriesVue/>
+        <rttEmployeurVue/> -->
+        <TableauJoursFeries/>
+        <TableauRttEmployeur/>
     </div>
 </template>
 
 <script>
-    import rttEmployeurVue from "../components/Tableau/rttEmployeur.vue";
-    import joursFeriesVue from "../components/Tableau/joursFeries.vue";
+import TableauJoursFeries from "../components/TableauJoursFeries.vue";
+import TableauRttEmployeur from "../components/TableauRttEmployeur.vue";
+    // import rttEmployeurVue from "../components/Tableau/rttEmployeur.vue";
+    // import joursFeriesVue from "../components/Tableau/joursFeries.vue";
 
     export default {
     name: "AffichageTableau",
@@ -25,6 +29,6 @@
     methods: {
        
     },
-    components: { joursFeriesVue, rttEmployeurVue }
+    components: { TableauJoursFeries, TableauRttEmployeur }
 }
 </script>

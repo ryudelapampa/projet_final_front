@@ -3,7 +3,7 @@
     <v-data-table
       :headers="headers"
       :items="absences"
-      :items-per-page="5"
+      :items-per-page="10"
       class="elevation-1"
     >
       <template v-slot:top>
@@ -125,7 +125,7 @@ export default {
   name: "TableauGestionService",
   data() {
     return {
-      absences: this.getAbsences(),
+      // absences: this.getAbsences(),
       currentItem: {},
       dialog: false,
       dialogDelete: false,
@@ -149,40 +149,30 @@ export default {
         statut: "",
       },
       headers: [
-        { text: "Nom", align: "center", value: "nom" },
-        { text: "Prénom", align: "center", value: "prenom" },
-        { text: "Email", align: "center", value: "email" },
+        { text: "Nom", align: "center", value: "collaborateur.nom" },
+        { text: "Prénom", align: "center", value: "collaborateur.prenom" },
+        { text: "Email", align: "center", value: "collaborateur.email" },
         { text: "Type d'absence", align: "center", value: "type" },
-        { text: "Date", align: "center", value: "date" },
+        { text: "Date", align: "center", value: "dateJour" },
         { text: "Motif", align: "center", value: "motif" },
         { text: "Statut", align: "center", value: "statut" },
         { text: "Actions", align: "center", value: "actions", sortable: false },
       ],
     };
   },
-  methods: {
-    getAbsences() {
+  computed: {
+    absences() {
       let absences = [];
-      AbsenceApi.gettAll().then((response) => {
-        let data = response.data;
-        for (let el of data) {
-          if (el.statut == "EN_ATTENTE_VALIDATION" || el.statut == "REJETEE") {
-            absences.push({
-              id: el.id,
-              type: el.type,
-              date: new Date(el.dateJour).toISOString().substring(0, 10),
-              motif: el.motif,
-              statut: el.statut,
-              nom: el.collaborateur.nom,
-              prenom: el.collaborateur.prenom,
-              email: el.collaborateur.email,
-              actions: "Actions",
-            });
-            this.absences = absences;
-          }
+      for (const collab of this.$store.state.stateCollaborateur.collaborateur.subordonnes ) {
+        for (const abs of collab.absences) {
+          abs.collaborateur = collab;
+          absences.push(abs);
         }
-      });
-    },
+      }
+      return absences;
+    }
+  },
+  methods: {
     editItem(item) {
       this.editedIndex = this.absences.indexOf(item);
       this.editedItem = Object.assign({}, item);

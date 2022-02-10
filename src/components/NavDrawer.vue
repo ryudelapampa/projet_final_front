@@ -33,9 +33,10 @@ export default {
   data() {
     return {
       items: [
-        { icon: "mdi-home-outline",
-        text_key: "home.title",
-        action: "/" 
+        { 
+          icon: "mdi-home-outline",
+          text_key: "home.title",
+          action: "/" 
         },
         {
           icon: "mdi-bug-check-outline",
@@ -47,26 +48,38 @@ export default {
           text_key: "holidays.title",
           action: "/tableau",
         },
-        { text_key: "" }, // divider (sans text_key)
+        { text_key: "" },
         {
           icon: "mdi-calendar-range",
           text_key: "planning.title",
           action: "/servicejour",
         },
         {
-          icon: "mdi-clipboard-text-clock-outline",
-          text_key: "manage-abs.title",
-          action: "/gestion",
-        },
-        {
           icon: "mdi-chart-bar",
           text_key: "graph-service.title",
           action: "/histogramme",
         },
-      ],
+      ]
     };
   },
+  mounted() {
+      this.refresh()
+    },
+  computed: {
+    
+  },
   methods: {
+    refresh() {
+      const items = this.items;
+       if (this.$store.state.stateCollaborateur.collaborateur.role.libelle == 'MANAGER') {
+        items.push({
+          icon: "mdi-clipboard-text-clock-outline",
+          text_key: "manage-abs.title",
+          action: "/gestion",
+        },)
+        return this.items = items;
+      } 
+    },
     switchLang(lang) {
       i18n.locale = lang;
     },

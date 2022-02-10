@@ -72,7 +72,7 @@
     },
     computed: {
       listeAbsence() {
-        return _.orderBy(this.$store.state.client.collaborateur.absences,'dateJour','desc')
+        return _.orderBy(this.$store.state.stateCollaborateur.collaborateur.absences,'dateJour','desc')
       },
       soldeConge() {
         let soldeConge = 16;

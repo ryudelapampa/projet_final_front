@@ -69,7 +69,7 @@
             this.$store.dispatch("getCollab");
         },
         computed: {
-            collaborateur() {return this.$store.state.client.collaborateur}
+            collaborateur() {return this.$store.state.stateCollaborateur.collaborateur}
         },
         methods: {
             submit() {

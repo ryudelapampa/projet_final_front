@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     collaborateur() {
-      return this.$store.state.client.collaborateur
+      return this.$store.state.stateCollaborateur.collaborateur
     }
   },
   mounted() {

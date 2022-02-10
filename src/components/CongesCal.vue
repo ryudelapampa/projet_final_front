@@ -121,7 +121,7 @@ export default {
   computed: {
     eventList() {
       let ev = [];
-      let data = this.$store.state.client.collaborateur.absences
+      let data = this.$store.state.stateCollaborateur.collaborateur.absences
       for (let el of data) {
         ev.push({
           id : el.id,

@@ -1,14 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { GestionAbsences } from "./storeAbsences";
-import { GestionClient } from "./storeClient";
+import { GestionCollaborateur } from "./storeCollaborateur";
+import { GestionJourFerie } from "./storeJoursFeries";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   modules: {
-    absences : GestionAbsences,
-    client : GestionClient,
+    stateAbsence : GestionAbsences,
+    stateCollaborateur : GestionCollaborateur,
+    stateJourFerie : GestionJourFerie
   },
 });
 

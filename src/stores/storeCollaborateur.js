@@ -1,6 +1,6 @@
 import CollaborateurApi from '../services/CollaborateurApi';
 
-export const GestionClient = {
+export const GestionCollaborateur = {
 
     state : {
         collaborateur : null

@@ -1,18 +1,33 @@
 <template>
   <div>
-    <h1>{{ $t("manage-abs.title") }}</h1>
 
-    <TableauGestionService />
+    <TableauGestionService2 v-if="controleAcces" />
     
   </div>
 </template>
 
 <script>
-  import TableauGestionService from "../components/TableauGestionService.vue";
+  // import TableauGestionService from "../components/TableauGestionService.vue";
+import TableauGestionService2 from "../components/TableauGestionService2.vue";
 
   export default {
     name: "GestionConges",
-    components: { TableauGestionService },
+    components: {  TableauGestionService2 },
+    data() {
+      return {
+        controleAcces : false
+      }
+    },
+    mounted() {
+      this.verifAcces()
+    },
+    methods: {
+      verifAcces() {
+        if (this.$store.state.stateCollaborateur.collaborateur.role.libelle != 'SALARIE') {
+          this.controleAcces = true
+        }
+      }
+    },
   };
 </script>
 

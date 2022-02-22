@@ -65,48 +65,19 @@
                   </v-row>
                 </v-container>
               </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="error darken-3" text @click="close">
-                  {{ $t("btn.cancel") }}
-                </v-btn>
-                <v-btn color="success darken-3" text @click="save">
-                  {{ $t("btn.save") }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title wrap class="text-h5">{{
-                $t("manage-abs.confirm-del")
-              }}</v-card-title>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="error darken-1" text @click="closeDelete">
-                  {{ $t("btn.cancel") }}
-                </v-btn>
-                <v-btn color="success darken-1" text @click="deleteItemConfirm">
-                  {{ $t("btn.ok") }}
-                </v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
             </v-card>
           </v-dialog>
         </v-toolbar>
       </template>
+
       <template v-slot:item.actions="{ item }">
-        <v-btn
-          x-small
-          color="success darken-1"
-          class="mr-2"
-          @click="editItem(item)"
-        >
-          {{ $t("btn.edit") }}
+      <!-- BOUTON VALIDER -->
+        <v-btn x-small color="success darken-1" class="mr-2" @click="validAbsence(item)" >
+          VALIDER
         </v-btn>
-        <v-btn x-small color="error darken-1" @click="deleteItem(item)">
-          {{ $t("btn.delete") }}
+        <!-- BOUTON REFUSER -->
+        <v-btn x-small color="error darken-1" @click="validAbsence(item)">
+          REFUSER
         </v-btn>
       </template>
       <template v-slot:no-data>
@@ -119,6 +90,7 @@
 </template>
 
 <script>
+import Absence from "../modeles/Absence";
 import AbsenceApi from "../services/AbsenceApi";
 
 export default {
@@ -173,6 +145,11 @@ export default {
     }
   },
   methods: {
+
+    validAbsence(absence) {
+      const absenceValid = new Absence(absence.id,absence.dateJour,absence.motif,absence.type,"VALIDEE",absence.collaborateur);
+      AbsenceApi.update(absence.id, absenceValid)
+    },
     editItem(item) {
       this.editedIndex = this.absences.indexOf(item);
       this.editedItem = Object.assign({}, item);

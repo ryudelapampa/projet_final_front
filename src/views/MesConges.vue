@@ -1,9 +1,13 @@
 <template>
   <div>
-
-
     <h1>{{ $t("absences.title") }}</h1>
-
+    <div class="container">
+      <div class="soldes" style="max-height: 120px;">
+        <p> Solde congé : {{ soldeConge }}</p>
+        <p>Solde RTT : {{ soldeRtt }} </p>
+      </div>
+      <!-- .soldes -->
+    
     <table>
       <thead>
         <th>{{ $t("absences.type") }}</th>
@@ -28,23 +32,31 @@
         </tr>
       </tbody>
     </table>
-
-    <v-slide-y-transition mode="out-in">
-      <FormulaireAjoutCongeVue/>
-    </v-slide-y-transition>
-
-
-
-    <div class="container">
-      <div class="soldes">
-        <p> Solde congé : {{ soldeConge }}</p>
-        <p>Solde RTT : {{ soldeRtt }} </p>
-      </div>
-      <!-- .soldes -->
-      <div>
-        <button class="btn btn-success">{{ $t("btn.add") }}</button>
-      </div>
     </div>
+
+    <v-dialog v-model="dialog" persistent> 
+      <template v-slot:activator="{on, attrs}">
+        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+          Demande de congés
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">Demande de congé</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-slide-y-transition mode="out-in">
+              <FormulaireAjoutCongeVue/>
+            </v-slide-y-transition>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <CongesCal />
   </div>
@@ -61,6 +73,7 @@
     components: { CongesCal,FormulaireAjoutCongeVue },
     data() {
       return {
+        dialog : false,
         loading : false,
         sortKey : '',
         sortSettings: {'date' : true},

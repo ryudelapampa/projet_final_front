@@ -20,7 +20,7 @@
                     <td>{{ abs.dateJour }}</td>
                     <td>{{ abs.motif }}</td>
                     <td>{{ abs.statut }}</td>
-                    <td>
+                    <td v-if="abs.statut != 'VALIDEE'">
                         <v-btn color="success" @click="validAbs(abs)">VALIDER</v-btn>
                         |
                         <v-btn color="error" @click="denyAbs()">REFUSER</v-btn>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import Absence from "../modeles/Absence";
+    // import Absence from "../modeles/Absence";
 import AbsenceApi from "../services/AbsenceApi";
 
     export default {
@@ -59,9 +59,14 @@ import AbsenceApi from "../services/AbsenceApi";
                 }
             },
             validAbs(absence) {
-                const validAbsence = new Absence(absence.id,absence.dateJour,absence.motif,absence.type,"VALIDEE",absence.collaborateur);
-                this.test = validAbsence;
-                AbsenceApi.update(validAbsence.id,validAbsence);
+                // const validAbsence = new Absence(absence.id,absence.dateJour,absence.motif,absence.type,"VALIDEE",absence.collaborateur);
+                // this.test = validAbsence;
+                absence.statut = "VALIDEE"
+                AbsenceApi.update(absence.id,absence);
+            },
+            denyAbs(absence) {
+                absence.statut = "REFUSEE"
+                AbsenceApi.update(absence.id);
             }
         },
     }

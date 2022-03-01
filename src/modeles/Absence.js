@@ -7,8 +7,16 @@ export default class Absence {
     type =""
     collaborateur = null
 
-    constructor(id,dateJour,motif,type,statut,collaborateur) {
-        this.id = id
+    // constructor(id,dateJour,motif,type,statut,collaborateur) {
+    //     this.id = id
+    //     this.dateJour = dateJour;
+    //     this.motif = motif;
+    //     this.statut = statut;
+    //     this.type = type;
+    //     this.collaborateur = collaborateur;
+    // }
+
+    constructor(dateJour,motif,type,statut,collaborateur) {
         this.dateJour = dateJour;
         this.motif = motif;
         this.statut = statut;

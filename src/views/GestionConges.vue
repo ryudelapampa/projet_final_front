@@ -1,8 +1,6 @@
 <template>
   <div>
-
     <TableauGestionService2 v-if="controleAcces" />
-    
   </div>
 </template>
 

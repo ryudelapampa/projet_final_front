@@ -11,8 +11,6 @@
 <script>
 import TableauJoursFeries from "../components/TableauJoursFeries.vue";
 import TableauRttEmployeur from "../components/TableauRttEmployeur.vue";
-    // import rttEmployeurVue from "../components/Tableau/rttEmployeur.vue";
-    // import joursFeriesVue from "../components/Tableau/joursFeries.vue";
 
     export default {
     name: "AffichageTableau",

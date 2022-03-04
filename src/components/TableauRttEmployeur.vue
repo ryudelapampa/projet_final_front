@@ -1,5 +1,6 @@
 <template>
     <div id="tableauRttEmployeur">
+        <h1>Tableau des congés d'entreprise</h1>
         <table style="flex-wrap: nowrap;">
             <thead>
                 <th >{{ $t("table.date") }}</th>

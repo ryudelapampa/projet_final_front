@@ -1,10 +1,16 @@
 <template>
-    <div id="AffichageTableau">
+    <div class="container" id="AffichageTableau">
         <!-- <v-btn id="switchTab" v-on:click="changeTab" color="primary" elevation="2" >{{ $t("holidays.table-rtt") }}</v-btn> -->
         <!-- <joursFeriesVue/>
         <rttEmployeurVue/> -->
-        <TableauJoursFeries/>
-        <TableauRttEmployeur/>
+        <v-row>
+            <v-col>
+                <TableauJoursFeries/>
+            </v-col>
+            <v-col>
+                <TableauRttEmployeur/>
+            </v-col>
+        </v-row>
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <TableauGestionService2 v-if="controleAcces" />
   </div>
 </template>

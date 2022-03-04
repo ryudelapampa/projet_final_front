@@ -6,8 +6,8 @@ import MesCongesVue from "../views/MesConges.vue";
 import JoursFeriesVue from "../views/JoursFeries.vue";
 import ServiceJourVue from "../views/ServiceJour.vue";
 import CongesServiceVue from "../views/GestionConges.vue";
-import FormulaireAjoutFerieVue from "../views/FormulaireAjoutFerie.vue";
-import FormulaireAjoutRttEmployeurVue from "../views/FormulaireAjoutRttEmployeur.vue";
+import FormulaireAjoutFerieVue from "../components/FormulaireAjoutFerie.vue";
+import FormulaireAjoutRttEmployeurVue from "../components/FormulaireAjoutRttEmployeur.vue";
 import AffichageTableauVue from "../views/AffichageTableau.vue";
 
 Vue.use(VueRouter);

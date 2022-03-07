@@ -4,11 +4,9 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import MesCongesVue from "../views/MesConges.vue";
 import JoursFeriesVue from "../views/JoursFeries.vue";
-import ServiceJourVue from "../views/ServiceJour.vue";
+import ServiceJourVue from "../views/CongeService.vue";
 import CongesServiceVue from "../views/GestionConges.vue";
-import FormulaireAjoutFerieVue from "../components/FormulaireAjoutFerie.vue";
-import FormulaireAjoutRttEmployeurVue from "../components/FormulaireAjoutRttEmployeur.vue";
-import AffichageTableauVue from "../views/AffichageTableau.vue";
+import AffichageTableauVue from "../views/CongeEntreprise.vue"; 
 
 Vue.use(VueRouter);
 
@@ -37,16 +35,6 @@ const routes = [
     path: "/gestion",
     name: "CongesService",
     component: CongesServiceVue,
-  },
-  {
-    path: "/ajoutferie",
-    name: "formulaireajoutferie",
-    component: FormulaireAjoutFerieVue,
-  },
-  {
-    path: "/ajoutrttemployeur",
-    name: "formulaireajoutrttemployeur",
-    component: FormulaireAjoutRttEmployeurVue,
   },
   {
     path: "/tableau",

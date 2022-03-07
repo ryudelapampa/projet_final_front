@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>{{ $t("absences.title") }}</h1>
     <div class="container">
-      <div class="soldes" style="max-height: 120px;">
+      <h1>{{ $t("absences.title") }}</h1>
+      <v-spacer></v-spacer>
+      <div class="soldes" >
         <p> Solde congé : {{ soldeConge }}</p>
         <p>Solde RTT : {{ soldeRtt }} </p>
       </div>
-      <!-- .soldes -->
-    
+    </div>
     <table>
       <thead>
         <th>{{ $t("absences.type") }}</th>
@@ -32,11 +32,10 @@
         </tr>
       </tbody>
     </table>
-    </div>
 
     <v-dialog v-model="dialog" persistent> 
       <template v-slot:activator="{on, attrs}">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+        <v-btn class="mt-3" color="primary" dark v-bind="attrs" v-on="on">
           Demande de congés
         </v-btn>
       </template>
@@ -44,6 +43,10 @@
         <v-card-title>
           <span class="text-h5">Demande de congé</span>
         </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialog = false"> Fermer </v-btn>
+        </v-card-actions>
         <v-card-text>
           <v-container>
             <v-slide-y-transition mode="out-in">
@@ -51,21 +54,17 @@
             </v-slide-y-transition>
           </v-container>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
 
-    <CongesCal />
+    <CongesCal v-bind:absences="h" />
   </div>
 </template>
 
 <script>
   import CongesCal from "../components/CongesCal.vue";
   import AbsenceApi from "../services/AbsenceApi";
-  import FormulaireAjoutCongeVue from "../components/FormulaireAjoutConge.vue";
+  import FormulaireAjoutCongeVue from "../components/Formulaire/ajoutConge.vue";
   import _ from 'lodash'
 
   export default {
@@ -82,6 +81,7 @@
     },
     mounted() {
       this.$store.dispatch("getCollab");
+      
     },
     computed: {
       listeAbsence() {
@@ -124,10 +124,12 @@
 </script>
 
 <style lang="scss" scoped>
+
   table {
+    margin: auto;
     border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
+    width: 80%;
     border: 1px solid #ddd;
     margin-top: 1rem;
   }
@@ -136,6 +138,7 @@
     background-color: darkgray;
     color: white;
   }
+
   th,
   td {
     text-align: left;
@@ -161,6 +164,14 @@
     background-color: green;
     color: white;
     padding: 1rem;
+  }
+
+  // SOLDE 
+
+  .soldes {
+    margin: auto;
+    max-height: 120px;
+    max-width: 200px;
   }
 
   /* CALENDAR */

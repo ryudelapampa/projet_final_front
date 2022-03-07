@@ -12,20 +12,17 @@
                     <td>{{ jourferie.dateJour }}</td>
                     <td>{{ jourferie.libelle }}</td>
                     <td v-show="administrateur">
-                        <v-btn>{{ $t("btn.edit") }}<v-icon color="green">mdi-lead-pencil</v-icon></v-btn>
-                        |
+                        <!-- <v-btn>{{ $t("btn.edit") }}<v-icon color="green">mdi-lead-pencil</v-icon></v-btn> -->
+                        <!-- | -->
                         <v-btn :loading="loading" color="error" @click="deleteArray(jourferie.id)">{{ $t("btn.delete") }}</v-btn>
                     </td>
                 </tr>
             </tbody>
-            <!-- <router-link to="/ajoutferie">
-                <v-btn v-show="administrateur" color="primary" elevation="2" outlined>{{ $t("btn.add") }}</v-btn>
-            </router-link> -->
         </table>
 
         <v-dialog v-model="dialog" persistent>
             <template v-slot:activator="{on,attrs}">
-                <v-btn v-show="administrateur" color="primary" dark v-bind="attrs" v-on="on">
+                <v-btn class="mt-3" v-show="administrateur" color="primary" dark v-bind="attrs" v-on="on">
                     Ajout jour férié
                 </v-btn> 
             </template>
@@ -34,7 +31,7 @@
                     <span class="text-h5">Ajout jour férié</span>
                     <v-spacer></v-spacer>
                     <v-card-actions>
-                        <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                        <v-btn color="blue darken-1" text @click="dialog = false">Fermer</v-btn>
                     </v-card-actions>
                 </v-card-title>
                 
@@ -54,8 +51,8 @@
 </template>
 
 <script>
-    import JourFerieApi from "../services/JourFerieApi";
-import FormulaireAjoutFerie from "./FormulaireAjoutFerie.vue";
+    import JourFerieApi from "../../services/JourFerieApi";
+import FormulaireAjoutFerie from "../Formulaire/ajoutFerie.vue";
 
     export default {
     name: "tableauJoursFeries",

@@ -115,13 +115,15 @@ export default {
     selectedOpen: false,
     dialog: false,
   }),
+  props: ['absences'],
   mounted() {
     this.$store.dispatch("getCollab")
   },
   computed: {
     eventList() {
       let ev = [];
-      let data = this.$store.state.stateCollaborateur.collaborateur.absences
+      // let data = this.$store.state.stateCollaborateur.collaborateur.absences
+      let data = this.absences;
       for (let el of data) {
         ev.push({
           id : el.id,

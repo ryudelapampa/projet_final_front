@@ -6,7 +6,7 @@
 
 <script>
   // import TableauGestionService from "../components/TableauGestionService.vue";
-import TableauGestionService2 from "../components/TableauGestionService2.vue";
+import TableauGestionService2 from "../components/Tableau/gestionService.vue";
 
   export default {
     name: "GestionConges",

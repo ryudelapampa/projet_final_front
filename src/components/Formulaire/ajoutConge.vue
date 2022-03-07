@@ -32,9 +32,9 @@
 <script>
     import { required, max, regex } from 'vee-validate/dist/rules'
     import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
-    import Absence from '../modeles/Absence'
-    import AbsenceApi from '../services/AbsenceApi'
-    import Collaborateur from '../modeles/Collaborateur'
+    import Absence from '../../modeles/Absence'
+    import AbsenceApi from '../../services/AbsenceApi'
+    import Collaborateur from '../../modeles/Collaborateur'
 
 
     setInteractionMode('eager')
@@ -75,6 +75,7 @@
                 AbsenceApi.add(this.absence);
                 this.dialog = false;
                 this.$store.dispatch("getCollab");
+                this.dialog = false
             }
         },
         components: {

@@ -19,9 +19,9 @@
 </template>
 
 <script>
-    import JourFerieApi from '../services/JourFerieApi'
-    import JourFerie from '../modeles/JourFerie'
-    import router from '../router'
+    import JourFerieApi from '../../services/JourFerieApi'
+    import JourFerie from '../../modeles/JourFerie'
+    import router from '../../router'
     import { required, max, regex } from 'vee-validate/dist/rules'
     import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 
@@ -57,6 +57,7 @@
               this.$refs.observer.validate();
               JourFerieApi.add(new JourFerie(this.datePicker,this.libelle));
               router.push("/tableau");
+              
           },
           clear () {
               this.datePicker = ''

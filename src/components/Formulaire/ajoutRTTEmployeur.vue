@@ -19,9 +19,9 @@
 </template>
 
 <script>
-  import AbsenceApi from '../services/AbsenceApi'
-  import Absence from '../modeles/Absence'
-  import router from '../router'
+  import AbsenceApi from '../../services/AbsenceApi'
+  import Absence from '../../modeles/Absence'
+  import router from '../../router'
   import { required, max, regex } from 'vee-validate/dist/rules'
   import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
   
@@ -57,7 +57,8 @@
       submit () {
         this.$refs.observer.validate();
         AbsenceApi.add(new Absence(this.datePicker, this.motif,'RTT_EMPLOYEUR','INITIALE'));
-        router.push("/tableau")
+        router.push("/tableau");
+        this.dialog = false;
       },
       clear () {
         this.datePicker = ''

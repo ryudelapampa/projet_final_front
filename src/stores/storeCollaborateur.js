@@ -14,7 +14,7 @@ export const GestionCollaborateur = {
 
     actions : {
         getCollab({commit}) {
-            CollaborateurApi.find(14).then(response => {commit('SET_COLLAB', response.data)})
+            CollaborateurApi.find(11).then(response => {commit('SET_COLLAB', response.data)})
         }
     }
 

@@ -1,5 +1,5 @@
 <template>
-    <table>
+    <table v-if="listeAbsences.length > 0">
         <thead>
             <th>Nom</th>
             <th>Prenom</th>
@@ -30,11 +30,12 @@
             <v-btn v-show="administrateur" color="primary" elevation="2" outlined>{{ $t("btn.add") }}</v-btn>
         </router-link>
     </table>
+    <h1 v-else>Il n'y a aucune demande de congé</h1>
 </template>
 
 <script>
     // import Absence from "../modeles/Absence";
-import AbsenceApi from "../services/AbsenceApi";
+import AbsenceApi from "../../services/AbsenceApi";
 import _ from 'lodash'
 
     export default {

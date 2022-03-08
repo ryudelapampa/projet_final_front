@@ -25,8 +25,10 @@
         let data = [];
         for (const subord of this.$store.state.stateCollaborateur.collaborateur.subordonnes) {
           for (const abs of subord.absences) {
-            abs.collaborateur = subord;
-            data.push(abs);
+            if (abs.statut == 'VALIDEE'){
+              abs.collaborateur = subord;
+              data.push(abs);   
+            }
           }
         }
         return data;

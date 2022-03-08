@@ -22,7 +22,7 @@
                 <td v-if="abs.statut != 'VALIDEE'">
                     <v-btn color="success" @click="validAbs(abs)">VALIDER</v-btn>
                     |
-                    <v-btn color="error" @click="denyAbs()">REFUSER</v-btn>
+                    <v-btn color="error" @click="denyAbs(abs)">REFUSER</v-btn>
                 </td>
             </tr>
         </tbody>
@@ -36,6 +36,7 @@
 <script>
     // import Absence from "../modeles/Absence";
 import AbsenceApi from "../../services/AbsenceApi";
+import Absence from "../../modeles/Absence";
 import _ from 'lodash'
 
     export default {
@@ -64,10 +65,8 @@ import _ from 'lodash'
         methods: {
             
             validAbs(absence) {
-                // const validAbsence = new Absence(absence.id,absence.dateJour,absence.motif,absence.type,"VALIDEE",absence.collaborateur);
-                // this.test = validAbsence;
-                absence.statut = "VALIDEE"
-                AbsenceApi.update(absence.id,absence);
+                const validAbsence = new Absence(absence.id,absence.dateJour,absence.motif,absence.type,"VALIDEE",absence.collaborateur);
+                AbsenceApi.update(validAbsence.id,validAbsence);
             },
             denyAbs(absence) {
                 absence.statut = "REFUSEE"

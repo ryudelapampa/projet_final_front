@@ -74,6 +74,10 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
+              <span v-html="selectedEvent.identite"></span>
+              <v-divider></v-divider>
+              <span v-html="selectedEvent.statut"></span>
+              <v-divider></v-divider>
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
             <v-card-actions>
@@ -129,8 +133,10 @@ export default {
           id : el.id,
           name: el.type,
           start: new Date(el.dateJour),
-          details: "motif : " + el.motif,
+          details: "Motif : " + el.motif,
           type: el.type,
+          statut: el.statut,
+          identite: el.collaborateur.prenom+ " "+ el.collaborateur.nom,
         });
       }
       return ev ;

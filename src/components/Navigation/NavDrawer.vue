@@ -1,15 +1,15 @@
 <template>
   <div>
-    <v-toolbar />
+    <!-- <v-toolbar /> -->
     <v-list dense>
       <template v-for="(item, i) in items">
         <v-divider dark v-if="item.divider" :key="i"></v-divider>
         <v-list-item ripple :to="item.action" :key="i" v-else>
-          <v-list-item-action>
+          <!-- <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
+          </v-list-item-action> -->
           <v-list-item-content>
-            <v-list-item-title v-if="item.text_key" class="body-2">{{
+            <v-list-item-title v-if="item.text_key" class="titre">{{
               $t(item.text_key)
             }}</v-list-item-title>
             <v-divider v-else />
@@ -18,10 +18,10 @@
       </template>
     </v-list>
     <v-divider />
-    <v-container class="lang-select d-flex justify-space-between">
+    <!-- <v-container class="lang-select d-flex justify-space-between">
       <v-btn @click="switchLang('fr')" color="deep-purple">FR</v-btn>
       <v-btn @click="switchLang('en')" color="deep-purple">EN</v-btn>
-    </v-container>
+    </v-container> -->
   </div>
 </template>
 
@@ -54,11 +54,11 @@ export default {
           text_key: "planning.title",
           action: "/servicejour",
         },
-        {
-          icon: "mdi-chart-bar",
-          text_key: "graph-service.title",
-          action: "/histogramme",
-        },
+        // {
+        //   icon: "mdi-chart-bar",
+        //   text_key: "graph-service.title",
+        //   action: "/histogramme",
+        // },
         {
           icon: "mdi-clipboard-text-clock-outline",
           text_key: "manage-abs.title",
@@ -83,4 +83,6 @@ export default {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
